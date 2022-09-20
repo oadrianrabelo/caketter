@@ -59,7 +59,7 @@ O trabalho tem como objetivo auxiliar o gerenciamento de pedidos de profissionai
       <img height="48" width="48" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-plain.svg" />
       <br>Docker&nbsp;
     </td>
-    <td align="center" width="96">
+    <td align="center" width="100">
       <img height="48" width="48" src="https://www.svgrepo.com/show/355256/spotify.svg" />
       <br>Spotify&#128541;
     </td>
