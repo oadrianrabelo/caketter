@@ -1,6 +1,6 @@
 version: '3'
 services:
-  postgres:
+  caketter_database:
     image: postgres:latest
     container_name: caketter
     restart: unless-stopped
