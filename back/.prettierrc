@@ -1,6 +1,5 @@
 {
   "singleQuote": true,
   "trailingComma": "all",
-  "prettier.tabWidth": 4,
-  "prettier.useTabs": true
+  "files.eol": "\n"
 }

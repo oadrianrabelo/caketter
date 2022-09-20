@@ -1,7 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { Get } from '@nestjs/common/decorators';
+import { Delete, Get, Param, Put } from '@nestjs/common/decorators';
+import { ParseIntPipe } from '@nestjs/common/pipes';
 import { CostumerService } from './costumer.service';
 import { CreateCostumer } from './dto/create-costumer.dto';
+import { UpdateCostumer } from './dto/update-costumer.dto';
 
 @Controller('costumers')
 export class CostumerController {
@@ -15,5 +17,23 @@ export class CostumerController {
   @Get()
   getCostumer() {
     return this.costumerService.getCostumer();
+  }
+
+  @Get(':id')
+  getCostumerById(@Param('id', ParseIntPipe) id: number) {
+    return this.costumerService.getCostumerById(id);
+  }
+
+  @Put(':id')
+  updateCostumer(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() costumerData: UpdateCostumer,
+  ) {
+    return this.costumerService.updateCostumer(id, costumerData);
+  }
+
+  @Delete(':id')
+  deleteCostumer(@Param('id', ParseIntPipe) id: number) {
+    return this.costumerService.deleteCostumer(id);
   }
 }
