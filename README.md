@@ -61,7 +61,7 @@ O trabalho tem como objetivo auxiliar o gerenciamento de pedidos de profissionai
     </td>
     <td align="center" width="96">
       <img height="48" width="48" src="https://www.svgrepo.com/show/355256/spotify.svg" />
-      <br>Spotify :stuck_out_tongue_closed_eyes&nbsp;
+      <br>Spotify :stuck_out_tongue_closed_eyes &nbsp;
     </td>
   </tr>
 </table>
