@@ -5,7 +5,7 @@ import { CostumerService } from './costumer.service';
 import { CreateCostumer } from './dto/create-costumer.dto';
 import { UpdateCostumer } from './dto/update-costumer.dto';
 
-@Controller('costumers')
+@Controller('costumer')
 export class CostumerController {
   constructor(private costumerService: CostumerService) {}
 
