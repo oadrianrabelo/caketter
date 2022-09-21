@@ -14,3 +14,15 @@ model Costumers {
 
   @@map("costumers")
 }
+
+model Cake {
+  id Int @id @default(autoincrement())
+  dough String 
+  filling String
+  size Float
+  theme String
+  name_top String? 
+  age_top String?
+
+  @@map("cake")
+}
