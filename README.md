@@ -1,8 +1,22 @@
-# CAKETTER :cake:
+# CAKETTER :cake
 
 Trabalho de Conclusão de Curso
 
 O trabalho tem como objetivo auxiliar o gerenciamento de pedidos de profissionais autônomos voltados para o ramo de confeitaria
+
+## Checklist
+
+### Banco de dados
+
+- [ ] -> Criar tabela de clientes
+- [ ] -> Criar tabela de bolos
+- [ ] -> Criar tabela de pedidos
+
+### Back end
+
+- [ ] -> Fazer o CRUD da tabela de clientes
+- [ ] -> Fazer o CRUD da tabela de bolos
+- [ ] -> Fazer o CRUD da tabela de pedidos
 
 ## Linguagens/Frameworks utilizadas
 
