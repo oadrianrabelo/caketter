@@ -8,7 +8,7 @@ export class CostumerService {
   constructor(private dataService: DataService) {}
 
   async createCostumer(costumer: CreateCostumer) {
-    const createCostumer = await this.dataService.costumers.create({
+    const createCostumer = await this.dataService.costumer.create({
       data: {
         ...costumer,
       },
@@ -17,11 +17,11 @@ export class CostumerService {
   }
 
   async getCostumer() {
-    return await this.dataService.costumers.findMany();
+    return await this.dataService.costumer.findMany();
   }
 
   async getCostumerById(id: number) {
-    return await this.dataService.costumers.findUnique({
+    return await this.dataService.costumer.findUnique({
       where: {
         id: id,
       },
@@ -33,7 +33,7 @@ export class CostumerService {
   }
 
   async updateCostumer(id: number, costumer: UpdateCostumer) {
-    return this.dataService.costumers.update({
+    return this.dataService.costumer.update({
       where: {
         id: id,
       },
@@ -48,7 +48,7 @@ export class CostumerService {
   }
 
   async deleteCostumer(id: number) {
-    return this.dataService.costumers.delete({
+    return this.dataService.costumer.delete({
       where: {
         id: id,
       },
