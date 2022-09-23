@@ -1,0 +1,36 @@
+import { OrderService } from './order.service';
+import { Controller, Post, Body, Get, Put } from '@nestjs/common';
+import { Param } from '@nestjs/common/decorators';
+import { CreateOrder } from './dto/create-order.dto';
+import { ParseIntPipe } from '@nestjs/common/pipes/parse-int.pipe';
+import { UpdateOrder } from './dto/update-order.dto';
+import { UpdateCake } from 'src/cake/dto/update-cake.dto';
+import { UpdateCostumer } from 'src/costumer/dto/update-costumer.dto';
+
+@Controller()
+export class OrderController {
+  constructor(private orderService: OrderService) {}
+
+  @Post('/order/create')
+  createOrder(@Body() dto: CreateOrder) {
+    return this.orderService.createOrder(dto);
+  }
+
+  @Get('/orders')
+  getOrders() {
+    return this.orderService.getOrders();
+  }
+
+  @Get('/order/:id')
+  getOrderById(@Param('id', ParseIntPipe) id: number) {
+    return this.orderService.getOrderById(id);
+  }
+
+  @Put('/order/edit/:id')
+  updateOrder(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() orderData: UpdateOrder,
+  ) {
+    return this.orderService.updateOrder(id, orderData);
+  }
+}
