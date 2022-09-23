@@ -9,15 +9,16 @@ datasource db {
 
 generator docs {
   provider = "node node_modules/prisma-docs-generator"
-  output = "../../docs"
+  output   = "../../docs"
 }
 
 model Costumer {
   id        Int       @id @default(autoincrement())
   name      String
   contact   String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime?
+  created_at DateTime @default(now())
+  updated_at DateTime?
+  Order     Order[]
 
   @@map("costumer")
 }
@@ -30,6 +31,23 @@ model Cake {
   theme    String
   name_top String?
   age_top  String?
+  Order    Order[]
+  created_at DateTime @default(now())
+  updated_at DateTime?
 
   @@map("cake")
+}
+
+model Order {
+  id          Int      @id @default(autoincrement())
+  costumer    Costumer @relation(fields: [id_costumer], references: [id])
+  id_costumer Int
+  cake        Cake     @relation(fields: [id_cake], references: [id])
+  id_cake     Int
+  price Float
+  delivery_date DateTime
+  created_at DateTime @default(now())
+  updated_at DateTime?
+
+  @@map("order")
 }
