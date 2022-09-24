@@ -4,19 +4,40 @@ Trabalho de Conclusão de Curso
 
 O trabalho tem como objetivo auxiliar o gerenciamento de pedidos de profissionais autônomos voltados para o ramo de confeitaria
 
-## Checklist
+# Checklist
 
-### Banco de dados
+## Banco de dados
 
-- [ ] -> Criar tabela de clientes
-- [ ] -> Criar tabela de bolos
-- [ ] -> Criar tabela de pedidos
+- [x] -> Criar tabela de clientes
+- [x] -> Criar tabela de bolos
+- [x] -> Criar tabela de pedidos
 
-### Back end
+## Back end
 
-- [ ] -> Fazer o CRUD da tabela de clientes
-- [ ] -> Fazer o CRUD da tabela de bolos
-- [ ] -> Fazer o CRUD da tabela de pedidos
+- [x] -> Fazer o CRUD da tabela de clientes
+- [x] -> Fazer o CRUD da tabela de bolos
+- [x] -> Fazer o CRUD da tabela de pedidos
+
+## Front end
+
+- [ ] -> Criar uma Home Page para o sistema
+
+### Cliente
+
+- [ ] -> Criar tela para cadastro de cliente
+- [ ] -> Criar tela para editar um cliente
+- [ ] -> Criar tela para deletar um cliente
+
+### Bolo
+
+- [ ] -> Criar tela para cadastro de bolo
+- [ ] -> Criar tela para editar um bolo
+- [ ] -> Criar tela para deletar um bolo
+
+## Usabilidade
+
+- [ ] -> Criar função para notificar o usuário quando a data de uma entrega se aproximar
+- [ ] ...
 
 ## Linguagens/Frameworks utilizadas
 
