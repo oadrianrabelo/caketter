@@ -34,5 +34,6 @@ export class UpdateOrder {
 
   @IsObject()
   cake: Cake;
+  @IsObject()
   costumer: Costumer;
 }

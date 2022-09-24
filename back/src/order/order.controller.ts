@@ -1,6 +1,6 @@
 import { OrderService } from './order.service';
 import { Controller, Post, Body, Get, Put } from '@nestjs/common';
-import { Param } from '@nestjs/common/decorators';
+import { Delete, Param } from '@nestjs/common/decorators';
 import { CreateOrder } from './dto/create-order.dto';
 import { ParseIntPipe } from '@nestjs/common/pipes/parse-int.pipe';
 import { UpdateOrder } from './dto/update-order.dto';
@@ -32,5 +32,9 @@ export class OrderController {
     @Body() orderData: UpdateOrder,
   ) {
     return this.orderService.updateOrder(id, orderData);
+  }
+  @Delete('/order/delete/:id')
+  deleteOrder(@Param('id', ParseIntPipe) id: number) {
+    return this.orderService.deleteOrder(id);
   }
 }

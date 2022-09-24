@@ -54,47 +54,30 @@ export class OrderService {
           },
           update: {
             dough: order.cake.dough,
+            filling: order.cake.filling,
+            size: order.cake.size,
+            theme: order.cake.theme,
+            age_top: order.cake.age_top,
+            name_top: order.cake.name_top,
+          },
+        },
+        costumer: {
+          connect: {
+            id: order.id_costumer,
+          },
+          update: {
+            name: order.costumer.name,
+            contact: order.costumer.contact,
           },
         },
       },
     });
   }
-}
-/*
-async updateOrder(
-    order: UpdateOrder,
-    cake: UpdateCake,
-    costumer: UpdateCostumer,
-  ) {
-    const updateCake = await this.dataService.cake.update({
+  async deleteOrder(id: number) {
+    return this.dataService.order.delete({
       where: {
-        id: order.id_cake,
-      },
-      data: {
-        dough: cake.dough,
-        filling: cake.filling,
-        size: cake.size,
-        theme: cake.theme,
+        id: id,
       },
     });
-    const updateCostumer = await this.dataService.costumer.update({
-      where: {
-        id: order.id_costumer,
-      },
-      data: {
-        name: costumer.name,
-        contact: costumer.contact,
-      },
-    });
-    const updateOrder = await this.dataService.order.update({
-      where: {
-        id: order.id,
-      },
-      data: {
-        delivery_date: order.delivery_date,
-        price: order.price,
-      },
-    });
-    return [updateCake, updateCostumer, updateOrder];
   }
-*/
+}
