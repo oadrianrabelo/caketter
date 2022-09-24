@@ -17,7 +17,7 @@ model Costumer {
   name      String
   contact   String
   created_at DateTime @default(now())
-  updated_at DateTime?
+  updated_at DateTime? @updatedAt
   Order     Order[]
 
   @@map("costumer")
@@ -33,7 +33,7 @@ model Cake {
   age_top  String?
   Order    Order[]
   created_at DateTime @default(now())
-  updated_at DateTime?
+  updated_at DateTime? @updatedAt
 
   @@map("cake")
 }
@@ -47,7 +47,7 @@ model Order {
   price Float
   delivery_date DateTime
   created_at DateTime @default(now())
-  updated_at DateTime?
+  updated_at DateTime? @updatedAt
 
   @@map("order")
 }

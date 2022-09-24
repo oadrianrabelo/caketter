@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common/decorators';
+import { Module } from '@nestjs/common';
 import { CostumerController } from './costumer.controller';
 import { CostumerService } from './costumer.service';
 
