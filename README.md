@@ -1,4 +1,4 @@
-# CAKETTER :cake
+# CAKETTER :cake:
 
 Trabalho de Conclusão de Curso
 
