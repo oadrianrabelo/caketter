@@ -12,42 +12,53 @@ generator docs {
   output   = "../../docs"
 }
 
+model User {
+  id         Int       @id @default(autoincrement())
+  uuid       String    @unique
+  name       String
+  password   String
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt()
+
+  @@map("user")
+}
+
 model Costumer {
-  id        Int       @id @default(autoincrement())
-  name      String
-  contact   String
-  created_at DateTime @default(now())
+  id         Int       @id @default(autoincrement())
+  name       String
+  contact    String
+  created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
-  Order     Order[]
+  Order      Order[]
 
   @@map("costumer")
 }
 
 model Cake {
-  id       Int     @id @default(autoincrement())
-  dough    String
-  filling  String
-  size     Float
-  theme    String
-  name_top String?
-  age_top  String?
-  Order    Order[]
-  created_at DateTime @default(now())
+  id         Int       @id @default(autoincrement())
+  dough      String
+  filling    String
+  size       Float
+  theme      String
+  name_top   String?
+  age_top    String?
+  Order      Order[]
+  created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
 
   @@map("cake")
 }
 
 model Order {
-  id          Int      @id @default(autoincrement())
-  costumer    Costumer @relation(fields: [id_costumer], references: [id])
-  id_costumer Int
-  cake        Cake     @relation(fields: [id_cake], references: [id])
-  id_cake     Int
-  price Float
+  id            Int       @id @default(autoincrement())
+  costumer      Costumer  @relation(fields: [id_costumer], references: [id])
+  id_costumer   Int
+  cake          Cake      @relation(fields: [id_cake], references: [id])
+  id_cake       Int
+  price         Float
   delivery_date DateTime
-  created_at DateTime @default(now())
-  updated_at DateTime? @updatedAt
+  created_at    DateTime  @default(now())
+  updated_at    DateTime? @updatedAt
 
   @@map("order")
 }
