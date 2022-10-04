@@ -14,8 +14,10 @@ generator docs {
 
 model User {
   id         Int       @id @default(autoincrement())
-  uuid       String    @unique
+  uuid       String    @unique @default(uuid())
   name       String
+  email      String    @unique
+  login      String    @unique
   password   String
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt()
