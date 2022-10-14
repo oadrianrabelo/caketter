@@ -1,8 +1,4 @@
 import { LockClosedIcon } from "@heroicons/react/20/solid";
-import { Input } from '../components/inputs/Input';
-import { TopInput } from '../components/inputs/TopInput';
-import { MiddleInput } from '../components/inputs/MiddleInput';
-import { BottomInput } from "../components/inputs/BottomInput";
 
 export function  SignUp(){
   return (
@@ -30,10 +26,54 @@ export function  SignUp(){
         <form action="$" className="mt-8 space-y-6">
           <input type="hidden" name="remember" value="true" />
           <div className="-space-y-px rounded-md shadow-sm">
-            <TopInput name="email" placeholder="Email" required="true"/>
-            <MiddleInput name="name" placeholder="Insira seu nome"  />
-            <MiddleInput name="password" placeholder="Insira sua senha"  />
-            <BottomInput name="password" placeholder="Password" middle="t" />
+            <div>
+              <label htmlFor="name" className="sr-only">
+                Nome
+              </label>
+              <input
+                name="name"
+                type="email"
+                required
+                placeholder="Escreva aqui seu nome"
+                className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus: outline-none focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label htmlFor="email-address" className="sr-only">
+                Email
+              </label>
+              <input
+                name="email"
+                autoComplete="email"
+                type="email"
+                required
+                placeholder="Email"
+                className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus: outline-none focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label htmlFor="login" className="sr-only">
+                Login
+              </label>
+              <input
+                name="login"
+                type="text"
+                required
+                placeholder="Login"
+                className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus: outline-none focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="sr-only"></label>
+              <input
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                required
+                placeholder="Senha"
+                className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus: outline-none focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
           </div>
           <div className="flex justify-center">
             <div className="text-sm">
