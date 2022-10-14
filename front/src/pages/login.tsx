@@ -1,5 +1,22 @@
 import { LockClosedIcon } from "@heroicons/react/20/solid";
+import { useAuth } from "../context/AuthContext";
+import { FormEvent, useState } from "react";
+
 export function Login() {
+  const { login } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignIn = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const data = {
+      email,
+      password,
+    };
+    await login(data);
+  };
+
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
@@ -22,7 +39,7 @@ export function Login() {
             </a>
           </p>
         </div>
-        <form action="$" className="mt-8 space-y-6">
+        <form onSubmit={handleSignIn} className="mt-8 space-y-6">
           <input type="hidden" name="remember" value="true" />
           <div className="-space-y-px rounded-md shadow-sm">
             <div>
@@ -35,6 +52,8 @@ export function Login() {
                 type="email"
                 required
                 placeholder="Email ou login"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus: outline-none focus:ring-indigo-500 sm:text-sm"
               />
             </div>
@@ -46,6 +65,8 @@ export function Login() {
                 autoComplete="current-password"
                 required
                 placeholder="Senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus: outline-none focus:ring-indigo-500 sm:text-sm"
               />
             </div>
