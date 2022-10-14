@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { api } from "../services/API";
 import {} from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -33,7 +33,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    api.get(`costumer`).then((res) => {
+    api.get(`costumer`).then((res: { data: SetStateAction<Costumer[]>; }) => {
       // const costumer = res.data;
       setCostumers(res.data);
     });
