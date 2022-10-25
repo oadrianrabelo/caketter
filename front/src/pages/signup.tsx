@@ -1,6 +1,45 @@
 import { LockClosedIcon } from "@heroicons/react/20/solid";
+import { useForm } from "react-hook-form";
+import { api } from "../../services/API";
+import { useState } from "react";
+import { Notification } from "../utils/Notification";
+import { useNavigate } from 'react-router-dom';
 
-export function  SignUp(){
+interface User {
+  name: string;
+  login: string;
+  email: string;
+  password: string;
+}
+interface IFormUser {
+  name: string;
+  login: string;
+  email: string;
+  password: string;
+}
+
+export function SignUp() {
+  const [user, setUser] = useState<User[]>([]);
+  const { register, handleSubmit } = useForm<IFormUser>();
+  const navigate = useNavigate();
+  const onSubmit = (data: IFormUser) => {
+    api
+      .post(`/auth/signup`, data)
+      .then(() => {
+        Notification.fire({
+          icon: "success",
+          title: `Conta criada com sucesso!\nBem vindo!`,
+        });
+        navigate('/temp')
+      })
+      .catch((err : any) => {
+        Notification.fire({
+          icon: "error",
+          title: `Erro ao criar conta`,
+          text: err
+        })
+      }) ;
+  };
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
@@ -16,14 +55,14 @@ export function  SignUp(){
           <p className="mt-2 text-center text-sm text-gray-600">
             Ou{" "}
             <a
-              href="/login"
+              href="/"
               className="font-medium text-indigo-600 hover:text-indigo-500"
             >
               entre em sua conta
             </a>
           </p>
         </div>
-        <form action="$" className="mt-8 space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} action="$" className="mt-8 space-y-6">
           <input type="hidden" name="remember" value="true" />
           <div className="-space-y-px rounded-md shadow-sm">
             <div>
@@ -31,11 +70,23 @@ export function  SignUp(){
                 Nome
               </label>
               <input
-                name="name"
-                type="email"
+                type="text"
                 required
                 placeholder="Escreva aqui seu nome"
                 className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus: outline-none focus:ring-indigo-500 sm:text-sm"
+                {...register("name")}
+              />
+            </div>
+            <div>
+              <label htmlFor="login" className="sr-only">
+                Login
+              </label>
+              <input
+              {...register("login")}
+                type="text"
+                required
+                placeholder="Login"
+                className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus: outline-none focus:ring-indigo-500 sm:text-sm"
               />
             </div>
             <div>
@@ -43,7 +94,7 @@ export function  SignUp(){
                 Email
               </label>
               <input
-                name="email"
+                {...register("email")}
                 autoComplete="email"
                 type="email"
                 required
@@ -52,21 +103,9 @@ export function  SignUp(){
               />
             </div>
             <div>
-              <label htmlFor="login" className="sr-only">
-                Login
-              </label>
-              <input
-                name="login"
-                type="text"
-                required
-                placeholder="Login"
-                className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus: outline-none focus:ring-indigo-500 sm:text-sm"
-              />
-            </div>
-            <div>
               <label htmlFor="password" className="sr-only"></label>
               <input
-                name="password"
+                {...register("password")}
                 type="password"
                 autoComplete="current-password"
                 required
