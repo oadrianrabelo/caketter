@@ -7,7 +7,6 @@ type SignInData = {
   password: string;
 };
 
-
 interface Props {
   children: React.ReactNode;
 }
@@ -84,7 +83,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
         icon: "success",
         title: `Bem Vindo!`,
       })
-      navigate('/encarregado')
+      navigate('/temp')
     } catch (err: any) {
       Notification.fire({
         icon: "error",
@@ -93,28 +92,11 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     }
   }
 
-  // async function signUp({ email, password, name, phone }: SignUpData) {
-  //   setLoadingAuth(true)
-  //   try {
-  //     const response = await api.post("/customer", {
-  //       email: email,
-  //       password: password,
-  //       name: name,
-  //       phone: phone
-  //     });
-  //     setLoadingAuth(false)
-  //     setError('')
-  //     navigation.navigate('SignIn')
-  //   } catch (err: any) {
-  //     setLoadingAuth(false)
-  //     setError(err.response.data.message)
-  //   }
-  // }
 
   function logout() {
     try {
       localStorage.clear()
-      navigate('/login')
+      navigate('/')
     } catch (e: any) {
       setError(e.response.data.message)
     }
@@ -126,7 +108,6 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
 export { AuthContext }
 
 export const useAuth = () => {
