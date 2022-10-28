@@ -48,7 +48,6 @@ export function Login() {
               </label>
               <input
                 name="email"
-                autoComplete="email"
                 type="email"
                 required
                 placeholder="Email ou login"
@@ -62,7 +61,6 @@ export function Login() {
               <input
                 name="password"
                 type="password"
-                autoComplete="current-password"
                 required
                 placeholder="Senha"
                 value={password}

@@ -7,9 +7,9 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <ProtectedRoute>
+        {/* <ProtectedRoute> */}
           <Router />
-        </ProtectedRoute>
+        {/* </ProtectedRoute> */}
       </AuthProvider>
     </BrowserRouter>
   );
