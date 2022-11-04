@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { api } from "../../../../services/API";
 import { Notification } from "../../../utils/Notification";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 interface Costumer {
   id: number;
   name: string;
@@ -13,28 +13,59 @@ interface Costumer {
 export default function Costumers() {
   const [costumers, setCostumers] = useState<Costumer[]>([]);
   const [value, setValue] = useState(0);
+  const [termo, setTermo] = useState('');
 
   const navigate = useNavigate();
+  const filterCostumer = () => {
+    api.get(`costumer/buscaTermo?termo=${termo}`).then((res: any) => {
+      setCostumers(res.data);
+    });
+  };
+
   const deleteCostumer = async (id: number) => {
     await api.delete(`costumer/${id}`).then(() => {
       Notification.fire({
         icon: "success",
-        title: "Cliente excluído com sucesso!"
+        title: "Cliente excluído com sucesso!",
       });
-      setValue(c => c + 1);
+      setValue((c) => c + 1);
     });
-  }
+  };
 
   useEffect(() => {
     api.get(`costumer`).then((res: any) => {
       setCostumers(res.data);
     });
-  });
+  }, []);
   return (
     <>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          filterCostumer();
+        }}
+      >
+        <div className="mb-6">
+          <label
+            htmlFor="termo"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
+            teste
+          </label>
+          <input
+            type="text"
+            id="termo"
+            value={termo}
+            onChange={e => setTermo(e.target.value)}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="digite"
+          />
+        </div>
+      </form>
+
       <button
         type="button"
-        onClick={() => navigate('/costumer/create')}
+        onClick={() => navigate("/costumer/create")}
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
       >
         Novo cliente

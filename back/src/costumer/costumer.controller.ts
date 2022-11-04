@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { Delete, Get, Param, Put } from '@nestjs/common/decorators';
+import { Delete, Get, Param, Query, Put } from '@nestjs/common/decorators';
 import { ParseIntPipe } from '@nestjs/common/pipes';
 import { CostumerService } from './costumer.service';
 import { CreateCostumer } from './dto/create-costumer.dto';
@@ -18,6 +18,10 @@ export class CostumerController {
   @Get()
   getCostumer() {
     return this.costumerService.getCostumer();
+  }
+  @Get('buscaTermo')
+  getCostumerByLike(@Query('termo') termo: string) {
+    return this.costumerService.getCostumerByLike(termo);
   }
 
   @Get(':id')
