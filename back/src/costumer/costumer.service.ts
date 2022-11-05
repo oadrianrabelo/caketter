@@ -20,6 +20,19 @@ export class CostumerService {
     return await this.dataService.costumer.findMany();
   }
 
+  async getCostumerByLike(termo: string) {
+    // const busca = `%${termo}%`;
+    // return await this.dataService
+    // .$queryRaw`SELECT * FROM "costumer" WHERE name LIKE ${busca}`;
+    return this.dataService.costumer.findMany({
+      where: {
+        name: {
+          contains: termo,
+        },
+      },
+    });
+  }
+
   async getCostumerById(id: number) {
     return await this.dataService.costumer.findUnique({
       where: {
