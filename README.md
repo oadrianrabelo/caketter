@@ -24,9 +24,9 @@ O trabalho tem como objetivo auxiliar o gerenciamento de pedidos de profissionai
 
 ### Cliente
 
-- [ ] -> Criar tela para cadastro de cliente
-- [ ] -> Criar tela para editar um cliente
-- [ ] -> Criar tela para deletar um cliente
+- [x] -> Criar tela para cadastro de cliente
+- [x] -> Criar tela para editar um cliente
+- [x] -> Criar tela para deletar um cliente
 
 ### Bolo
 
