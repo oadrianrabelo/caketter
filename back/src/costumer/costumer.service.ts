@@ -17,7 +17,11 @@ export class CostumerService {
   }
 
   async getCostumer() {
-    return await this.dataService.costumer.findMany();
+    return await this.dataService.costumer.findMany({
+      orderBy: {
+        created_at: 'asc',
+      },
+    });
   }
 
   async getCostumerByLike(termo: string) {
