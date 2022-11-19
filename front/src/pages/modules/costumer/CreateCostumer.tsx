@@ -1,6 +1,4 @@
-import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../../services/API";
 import { Notification } from "../../../utils/Notification";
@@ -15,7 +13,6 @@ interface IFormCostumer {
 }
 
 export function CreateCostumer() {
-  const [user, setUser] = useState<Costumer[]>([]);
   const { register, handleSubmit } = useForm<IFormCostumer>();
   const navigate = useNavigate();
   const onSubmit = (data: IFormCostumer) => {
@@ -31,7 +28,7 @@ export function CreateCostumer() {
       .catch((err: any) => {
         Notification.fire({
           icon: "error",
-          title: `Erro ao criar conta`,
+          title: `Erro ao cadastrar cliente`,
           text: err,
         });
       });
@@ -69,7 +66,7 @@ export function CreateCostumer() {
               />
             </div>
             <div>
-              <label htmlFor="login" className="sr-only">
+              <label htmlFor="contact" className="sr-only">
                 Contato
               </label>
               <input
