@@ -30,9 +30,9 @@ O trabalho tem como objetivo auxiliar o gerenciamento de pedidos de profissionai
 
 ### Bolo
 
-- [ ] -> Criar tela para cadastro de bolo
-- [ ] -> Criar tela para editar um bolo
-- [ ] -> Criar tela para deletar um bolo
+- [x] -> Criar tela para cadastro de bolo
+- [x] -> Criar tela para editar um bolo
+- [x] -> Criar tela para deletar um bolo
 
 ## Usabilidade
 
