@@ -4,6 +4,8 @@ import { SignUp } from "../pages/signup";
 import Home from "./../index";
 import Costumers from '../pages/modules/costumer/Costumers';
 import { CreateCostumer } from '../pages/modules/costumer/CreateCostumer';
+import { CreateCake } from '../pages/modules/cake/CreateCake';
+import { Cakes } from "../pages/modules/cake/Cakes";
 
 const Router: React.FC = () => (
   <Routes>
@@ -12,6 +14,8 @@ const Router: React.FC = () => (
     <Route path="/signup" element={<SignUp />} />
     <Route path="/costumers" element={<Costumers />} />
     <Route path="/costumer/create" element={<CreateCostumer />} />
+    <Route path="/cakes" element={<Cakes />} />
+    <Route path="/cake/create" element={<CreateCake />} />
   </Routes>
 );
 export default Router;
