@@ -7,3 +7,10 @@
     @apply bg-slate-200 dark:bg-[#1f2937] h-auto;
   }
 }
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
