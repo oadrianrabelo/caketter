@@ -7,6 +7,7 @@ import { CreateCostumer } from '../pages/modules/costumer/CreateCostumer';
 import { CreateCake } from '../pages/modules/cake/CreateCake';
 import { Cakes } from "../pages/modules/cake/Cakes";
 import { Orders } from "../pages/modules/order/Orders";
+import { CreateOrder } from "../pages/modules/order/CreateOrder";
 
 const Router: React.FC = () => (
   <Routes>
@@ -18,6 +19,7 @@ const Router: React.FC = () => (
     <Route path="/cakes" element={<Cakes />} />
     <Route path="/cake/create" element={<CreateCake />} />
     <Route path="/orders" element={<Orders />} />
+    <Route path="/order/create" element={<CreateOrder />} />
   </Routes>
 );
 export default Router;
