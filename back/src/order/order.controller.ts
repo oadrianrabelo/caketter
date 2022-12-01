@@ -4,8 +4,6 @@ import { Delete, Param } from '@nestjs/common/decorators';
 import { CreateOrder } from './dto/create-order.dto';
 import { ParseIntPipe } from '@nestjs/common/pipes/parse-int.pipe';
 import { UpdateOrder } from './dto/update-order.dto';
-import { UpdateCake } from 'src/cake/dto/update-cake.dto';
-import { UpdateCostumer } from 'src/costumer/dto/update-costumer.dto';
 
 @Controller()
 export class OrderController {

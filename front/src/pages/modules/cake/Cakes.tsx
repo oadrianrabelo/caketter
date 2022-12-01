@@ -106,8 +106,8 @@ export function Cakes() {
                 >
                   <td className="py-4 px-6">{cake.id}</td>
                   <td className="py-4 px-6">{cake.dough}</td>
-                  <td className="py-4 px-6">{cake.size}</td>
                   <td className="py-4 px-6">{cake.filling}</td>
+                  <td className="py-4 px-6">{cake.size}</td>
                   <td className="py-4 px-6">{cake.name_top}</td>
                   <td className="py-4 px-6">{cake.age_top}</td>
                   <td className="py-4 px-6">{formatDate(cake.created_at)}</td>
