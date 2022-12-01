@@ -5,7 +5,6 @@ import Select from "react-select";
 import Creatable from "react-select/creatable";
 import { api } from "../../../../services/API";
 import { Notification } from "../../../utils/Notification";
-import { SelectCostumer } from "./components/SelectCostumer";
 
 interface Costumer {
   id: number;
