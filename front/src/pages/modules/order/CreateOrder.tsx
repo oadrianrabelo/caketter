@@ -70,6 +70,7 @@ export function CreateOrder() {
     });
   }, []);
   return (
+    // TODO: refactor page layout. make more beautiful 
     <>
       <form action="$" onSubmit={handleSubmit(onSubmit)}>
         <h1>Cliente</h1>
