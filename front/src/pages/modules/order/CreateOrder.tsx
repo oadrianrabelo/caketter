@@ -73,20 +73,17 @@ export function CreateOrder() {
     <>
       <form action="$" onSubmit={handleSubmit(onSubmit)}>
         <h1>Cliente</h1>
-        <select 
-        id="select-costumer"
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        <select
+          {...register("id_costumer", {
+            setValueAs: (v) => parseFloat(v),
+          })}
+          id="select-costumer"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
-          <option disabled >Escolha um cliente</option>
+          <option disabled>Escolha um cliente</option>
           {costumers.map((costumer) => {
             return (
-              <option
-                {...register("id_costumer", {
-                  setValueAs: (v) => parseFloat(v),
-                })}
-                key={costumer.id}
-                value={costumer.id}
-              >
+              <option key={costumer.id} value={costumer.id}>
                 {costumer.name}
               </option>
             );
@@ -98,14 +95,15 @@ export function CreateOrder() {
           id="select-cake"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
-          <option disabled selected >Escolha um bolo</option>
+          <option disabled selected>
+            Escolha um bolo
+          </option>
           {cakes.map((cake) => {
             return (
               <optgroup key={cake.id} label={`Bolo ${cake.id}`}>
                 <option value={cake.id}>
-                Massa: {cake.dough};
-                Recheio: {cake.filling};
-                Nome topo: {cake.name_top}
+                  Massa: {cake.dough}; Recheio: {cake.filling}; Nome topo:{" "}
+                  {cake.name_top}
                 </option>
               </optgroup>
             );
@@ -121,7 +119,9 @@ export function CreateOrder() {
         <button
           type="submit"
           className="text-white bg-blue-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-        >Criar pedido</button>
+        >
+          Criar pedido
+        </button>
       </form>
     </>
   );
