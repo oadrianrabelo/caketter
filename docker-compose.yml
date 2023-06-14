@@ -1,0 +1,40 @@
+version: '3'
+volumes:
+  caketter-data:
+services:
+  database:
+    image: postgres
+    restart: unless-stopped
+    volumes:
+      - caketter-data:/var/lib/postgresql/
+    ports:
+      - 5432:5432
+    env_file: .env
+    environment:
+      - POSTGRES_USER=caketter
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_DB=caketter_database
+
+  backend:
+    build: 
+      context: ./back
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - 3001:3001
+    depends_on:
+      - database
+    links:
+      - database
+    environment:
+      - DATABASE_URL=postgresql://caketter:12345678@database:5432/caketter_database?schema=public
+
+  frontend:
+    build:
+      context: ./front 
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
