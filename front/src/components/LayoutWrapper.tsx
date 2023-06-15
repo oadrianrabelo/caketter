@@ -14,15 +14,15 @@ const headerNavLinks = [
     href: "/home",
   },
   {
-    title: "Costumers",
+    title: "Clientes",
     href: "/costumers",
   },
   {
-    title: "Cakes",
+    title: "Bolos",
     href: "/cakes",
   },
   {
-    title: "Orders",
+    title: "Pedidos",
     href: "/orders",
   },
 ];
