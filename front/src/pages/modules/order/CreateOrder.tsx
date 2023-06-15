@@ -70,46 +70,61 @@ export function CreateOrder() {
     });
   }, []);
   return (
+    // TODO: refactor page layout. make more beautiful 
     <>
       <form action="$" onSubmit={handleSubmit(onSubmit)}>
-        <h1>Costumer</h1>
-        <select id="select-costumer">
+        <h1>Cliente</h1>
+        <select
+          {...register("id_costumer", {
+            setValueAs: (v) => parseFloat(v),
+          })}
+          id="select-costumer"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option disabled selected>
+            Escolha um cliente
+          </option>
           {costumers.map((costumer) => {
             return (
-              <option
-                {...register("id_costumer", {
-                  setValueAs: (v) => parseFloat(v),
-                })}
-                key={costumer.id}
-                value={costumer.id}
-              >
+              <option key={costumer.id} value={costumer.id}>
                 {costumer.name}
               </option>
             );
           })}
         </select>
-        <h1>Cake</h1>
+        <h1>Bolo</h1>
         <select
           {...register("id_cake", { setValueAs: (v) => parseFloat(v) })}
           id="select-cake"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
+          <option disabled selected>
+            Escolha um bolo
+          </option>
           {cakes.map((cake) => {
             return (
-              <option key={cake.id} value={cake.id}>
-                {cake.dough};{cake.filling};{cake.name_top}
-              </option>
+              <optgroup key={cake.id} label={`Bolo ${cake.id}`}>
+                <option value={cake.id}>
+                  Massa: {cake.dough}; Recheio: {cake.filling}; Nome topo:{" "}
+                  {cake.name_top}
+                </option>
+              </optgroup>
             );
           })}
         </select>
+        <h1>Preço</h1>
         <input
           {...register("price", { setValueAs: (v) => parseFloat(v) })}
           type="number"
         />
-        <input
-          {...register("delivery_date")}
-          type="datetime-local"
-        ></input>
-        <button type="submit">teste</button>
+        <h1>Data de entrega</h1>
+        <input {...register("delivery_date")} type="datetime-local"></input>
+        <button
+          type="submit"
+          className="text-white bg-blue-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+        >
+          Criar pedido
+        </button>
       </form>
     </>
   );

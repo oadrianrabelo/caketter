@@ -8,11 +8,13 @@ import { CreateCake } from '../pages/modules/cake/CreateCake';
 import { Cakes } from "../pages/modules/cake/Cakes";
 import { Orders } from "../pages/modules/order/Orders";
 import { CreateOrder } from "../pages/modules/order/CreateOrder";
+import Temp from "../temp";
 
 const Router: React.FC = () => (
   <Routes>
     <Route path="/" element={<Login />} />
-    <Route path="/temp" element={<Home />} />
+    <Route path="/temp" element={<Temp />} />
+    <Route path="/home" element={<Home />} />
     <Route path="/signup" element={<SignUp />} />
     <Route path="/costumers" element={<Costumers />} />
     <Route path="/costumer/create" element={<CreateCostumer />} />

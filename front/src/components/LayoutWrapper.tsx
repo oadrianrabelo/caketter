@@ -11,7 +11,7 @@ interface Props {
 const headerNavLinks = [
   {
     title: "Home",
-    href: "/",
+    href: "/home",
   },
   {
     title: "Costumers",
