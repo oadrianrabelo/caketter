@@ -16,5 +16,5 @@ RUN npm i -g prisma
 
 EXPOSE 3001
 
-# CMD ["npm", "run", "start"]
+# CMD ["npm", "run", "start:dev"]
 CMD ["sh", "-c", "npm run prisma:generate && npm run prisma:migrate && npm run start:dev"]

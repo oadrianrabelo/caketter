@@ -1,12 +1,10 @@
 version: '3'
-volumes:
-  caketter-data:
 services:
   database:
     image: postgres
-    restart: unless-stopped
+    restart: always
     volumes:
-      - caketter-data:/var/lib/postgresql/
+      - caketter-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     env_file: .env
@@ -34,7 +32,18 @@ services:
     build:
       context: ./front 
       dockerfile: Dockerfile
+    volumes:
+      - ./front/src:/home/node/app/src
+      - ./front/vite.config.ts:/home/node/app/vite.config
+      - ./front/tsconfig.json:/home/node/app/tsconfig.json
+      - ./front/tsconfig.node.json:/home/node/app/tsconfig.node.json
     ports:
-      - 3000:3000
+      - "3000:3000"
     depends_on:
       - backend
+    # command: npm dev
+    environment:
+      - PORT=5173
+      - HOST=0.0.0.0
+volumes:
+  caketter-data:
