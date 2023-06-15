@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../../services/API";
 import { formatDate } from "../../../utils/formatDate";
+import HeaderOne from "../../../components/HeaderOne";
 
 interface Costumer {
   id: number;
@@ -44,6 +45,7 @@ export function Orders() {
   }, []);
   return (
     <>
+      <HeaderOne title="Pedidos" />
       <button
         type="button"
         onClick={() => navigate("/order/create")}

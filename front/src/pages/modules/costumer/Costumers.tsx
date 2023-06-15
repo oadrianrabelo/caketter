@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { UpdateCostumer } from "./UpdateCostumer";
 import { formatDate } from "../../../utils/formatDate";
 import Swal from "sweetalert2";
+import HeaderOne from "../../../components/HeaderOne";
 interface Costumer {
   id: number;
   name: string;
@@ -69,13 +70,8 @@ export default function Costumers() {
           filterCostumer();
         }}
       >
+        <HeaderOne title="Clientes"/>
         <div className="mb-6">
-          <label
-            htmlFor="termo"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
-            teste
-          </label>
           <input
             type="text"
             id="termo"

@@ -4,6 +4,7 @@ import { api } from "../../../../services/API";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { UpdateCake } from "./UpdateCake";
+import HeaderOne from "../../../components/HeaderOne";
 interface Cake {
   id: number;
   dough: string;
@@ -58,6 +59,7 @@ export function Cakes() {
   };
   return (
     <>
+      <HeaderOne title="Bolos"/>
       <button
         type="button"
         onClick={() => navigate("/cake/create")}
