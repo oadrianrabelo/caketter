@@ -1,4 +1,6 @@
 node_modules/
 back/.env/
-back/.env
+back/.oldenv
+.vscode
 front/src/temp.tsx
+

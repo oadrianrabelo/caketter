@@ -1,0 +1,49 @@
+version: '3'
+services:
+  database:
+    image: postgres
+    restart: always
+    volumes:
+      - caketter-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    env_file: .env
+    environment:
+      - POSTGRES_USER=caketter
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_DB=caketter_database
+
+  backend:
+    build: 
+      context: ./back
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - 3001:3001
+    depends_on:
+      - database
+    links:
+      - database
+    environment:
+      - DATABASE_URL=postgresql://caketter:12345678@database:5432/caketter_database?schema=public
+
+  frontend:
+    build:
+      context: ./front 
+      dockerfile: Dockerfile
+    volumes:
+      - ./front/src:/home/node/app/src
+      - ./front/vite.config.ts:/home/node/app/vite.config
+      - ./front/tsconfig.json:/home/node/app/tsconfig.json
+      - ./front/tsconfig.node.json:/home/node/app/tsconfig.node.json
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    # command: npm dev
+    environment:
+      - PORT=5173
+      - HOST=0.0.0.0
+volumes:
+  caketter-data:

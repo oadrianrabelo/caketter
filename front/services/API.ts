@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export function getApiClient(_ctx?: any) {
   const api = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:3001',
   });
 
   api.interceptors.request.use((config: any) => {
