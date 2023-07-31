@@ -25,9 +25,6 @@ export class CostumerService {
   }
 
   async getCostumerByLike(termo: string) {
-    // const busca = `%${termo}%`;
-    // return await this.dataService
-    // .$queryRaw`SELECT * FROM "costumer" WHERE name LIKE ${busca}`;
     return this.dataService.costumer.findMany({
       where: {
         name: {
