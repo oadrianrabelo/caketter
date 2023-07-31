@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { Delete, Param, Put } from '@nestjs/common/decorators';
+import { Delete, Param, Put, Query } from '@nestjs/common/decorators';
 import { ParseIntPipe } from '@nestjs/common/pipes';
 import { CakeService } from './cake.service';
 import { CreateCake } from './dto/create-cake.dto';
@@ -22,6 +22,11 @@ export class CakeController {
   @Get('/cake/:id')
   getCakeById(@Param('id', ParseIntPipe) id: number) {
     return this.cakeService.getCakeById(id);
+  }
+
+  @Get('/cakes/search')
+  getCakeSearch(@Query('q') q: string) {
+    return this.cakeService.getCakeSearch(q);
   }
 
   @Put('cake/edit/:id')

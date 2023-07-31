@@ -20,6 +20,16 @@ export class CakeService {
     return await this.dataService.cake.findMany();
   }
 
+  async getCakeSearch(q: any) {
+    return this.dataService.cake.findMany({
+      where: {
+        name_top: {
+          contains: q,
+        },
+      },
+    });
+  }
+
   async getCakeById(id: number) {
     return await this.dataService.cake.findUnique({
       where: {

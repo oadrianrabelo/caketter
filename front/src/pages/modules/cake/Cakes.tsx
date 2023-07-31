@@ -20,7 +20,15 @@ interface Cake {
 export function Cakes() {
   const [cakes, setCakes] = useState<Cake[]>([]);
   const [value, setValue] = useState(0);
+  const [search, setSearch] = useState("");
+
   const navigate = useNavigate();
+
+  const searchCake = () => {
+    api.get(`cakes/search?q=${search}`).then((res: any) => {
+      setCakes(res.data);
+    });
+  };
 
   useEffect(() => {
     api.get(`cakes`).then((res) => {
@@ -28,7 +36,6 @@ export function Cakes() {
     });
   }, []);
 
-  
   const deleteCake = async (id: number) => {
     const styledModal = Swal.mixin({
       customClass: {
@@ -37,29 +44,48 @@ export function Cakes() {
       },
       buttonsStyling: true,
     });
-    styledModal.fire({
-      title: "Deseja realmente excluir?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Sim",
-      cancelButtonText: "Não",
-      reverseButtons: true,
-    })
-    .then(async (result) => {
-      if (result.isConfirmed) {
-        await api.delete(`cake/delete/${id}`).then(() => {
-          setValue((c) => c + 1);
-          window.location.reload(), 4000;
-        });
-        styledModal.fire("Bolo excluído com sucesso!", "", "success");
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        styledModal.fire("Operação cancelada!", "", "error");
-      }
-    });
+    styledModal
+      .fire({
+        title: "Deseja realmente excluir?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sim",
+        cancelButtonText: "Não",
+        reverseButtons: true,
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          await api.delete(`cake/delete/${id}`).then(() => {
+            setValue((c) => c + 1);
+            window.location.reload(), 4000;
+          });
+          styledModal.fire("Bolo excluído com sucesso!", "", "success");
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          styledModal.fire("Operação cancelada!", "", "error");
+        }
+      });
   };
   return (
     <>
-      <HeaderOne title="Bolos"/>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          searchCake();
+        }}
+      >
+      <HeaderOne title="Bolos" />
+
+      <div className="mb-6">
+        <input
+          type="text"
+          id="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="digite algo"
+        />
+      </div>
+      </form>
       <button
         type="button"
         onClick={() => navigate("/cake/create")}
