@@ -17,11 +17,11 @@ interface Costumer {
 export default function Costumers() {
   const [costumers, setCostumers] = useState<Costumer[]>([]);
   const [value, setValue] = useState(0);
-  const [termo, setTermo] = useState("");
+  const [search, setSearch] = useState("");
 
   const navigate = useNavigate();
   const filterCostumer = () => {
-    api.get(`costumer/buscaTermo?termo=${termo}`).then((res: any) => {
+    api.get(`costumer/search?q=${search}`).then((res: any) => {
       setCostumers(res.data);
     });
   };
@@ -74,9 +74,9 @@ export default function Costumers() {
         <div className="mb-6">
           <input
             type="text"
-            id="termo"
-            value={termo}
-            onChange={(e) => setTermo(e.target.value)}
+            id="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="digite"
           />
