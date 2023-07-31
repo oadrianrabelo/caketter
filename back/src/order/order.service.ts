@@ -27,6 +27,18 @@ export class OrderService {
     });
   }
 
+  async getOrderSearch(q: any) {
+    return this.dataService.order.findMany({
+      where: {
+        costumer: {
+          name: {
+            contains: q,
+          },
+        },
+      },
+    });
+  }
+
   async getOrderById(id: number) {
     return await this.dataService.order.findUnique({
       where: {
