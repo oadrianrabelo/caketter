@@ -19,9 +19,10 @@ export class CostumerController {
   getCostumer() {
     return this.costumerService.getCostumer();
   }
-  @Get('buscaTermo')
-  getCostumerByLike(@Query('termo') termo: string) {
-    return this.costumerService.getCostumerByLike(termo);
+
+  @Get('search')
+  getCostumerByLike(@Query('q') q: string) {
+    return this.costumerService.getCostumerByLike(q);
   }
 
   @Get(':id')
