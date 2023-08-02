@@ -36,16 +36,46 @@ interface Order {
 export function Orders() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [value, setValue] = useState(0);
+  const [search, setSearch] = useState("");
 
   const navigate = useNavigate();
+
+  const searchOrder = (): void => {
+    api.get(`orders/search?q=${search}`)
+    .then((res: any) => {
+      console.log(res.data);
+      setOrders(res.data);
+
+    });
+  };
+
   useEffect(() => {
     api.get(`orders`).then((res) => {
       setOrders(res.data);
     });
   }, []);
+
   return (
     <>
-      <HeaderOne title="Pedidos" />
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          searchOrder();
+        }}
+      >
+        <HeaderOne title="Pedidos" />
+
+        <div className="mb-6">
+          <input
+            type="text"
+            id="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="digite algo"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          />
+        </div>
+      </form>
       <button
         type="button"
         onClick={() => navigate("/order/create")}
