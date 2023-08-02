@@ -1,6 +1,6 @@
 import { OrderService } from './order.service';
 import { Controller, Post, Body, Get, Put } from '@nestjs/common';
-import { Delete, Param } from '@nestjs/common/decorators';
+import { Delete, Param, Query } from '@nestjs/common/decorators';
 import { CreateOrder } from './dto/create-order.dto';
 import { ParseIntPipe } from '@nestjs/common/pipes/parse-int.pipe';
 import { UpdateOrder } from './dto/update-order.dto';
@@ -17,6 +17,11 @@ export class OrderController {
   @Get('/orders')
   getOrders() {
     return this.orderService.getOrders();
+  }
+
+  @Get('/orders/search')
+  getOrdersSearch(@Query('q') q: string) {
+    return this.orderService.getOrderSearch(q);
   }
 
   @Get('/order/:id')
