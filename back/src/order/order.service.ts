@@ -24,6 +24,9 @@ export class OrderService {
         cake: true,
         costumer: true,
       },
+      orderBy: {
+        id: 'asc',
+      },
     });
   }
 
