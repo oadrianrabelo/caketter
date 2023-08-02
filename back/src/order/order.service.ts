@@ -29,6 +29,14 @@ export class OrderService {
 
   async getOrderSearch(q: any) {
     return this.dataService.order.findMany({
+      select: {
+        costumer: true,
+        cake: true,
+        created_at: true,
+        delivery_date: true,
+        updated_at: true,
+        price: true,
+      },
       where: {
         costumer: {
           name: {
