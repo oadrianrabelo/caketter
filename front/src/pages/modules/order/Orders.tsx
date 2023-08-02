@@ -97,10 +97,16 @@ export function Orders() {
                 Cliente
               </th>
               <th scope="col" className="py-3 px-6">
+                Preço
+              </th>
+              <th scope="col" className="py-3 px-6">
                 Data de criação
               </th>
               <th scope="col" className="py-3 px-6">
                 Última alteração
+              </th>
+              <th scope="col" className="py-3 px-6">
+                Data de entrega
               </th>
               <th scope="col" className="py-3 px-6"></th>
               <th scope="col" className="py-3 px-6"></th>
@@ -168,8 +174,10 @@ export function Orders() {
                       </tbody>
                     </table>
                   </td>
+                  <td>{order.price}</td>
                   <td className="py-4 px-6">{formatDate(order.created_at)}</td>
                   <td className="py-4 px-6">{formatDate(order.updated_at)}</td>
+                  <td className="py-4 px-6">{formatDate(order.delivery_date)}</td>
                   <td className="py-4 px-1">edit</td>
                   <td className="py-4 px-1">
                     <button
