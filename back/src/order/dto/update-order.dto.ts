@@ -32,8 +32,8 @@ export class UpdateOrder {
   @Type(() => Date)
   delivery_date: Date;
 
-  @IsObject()
-  cake: Cake;
-  @IsObject()
-  costumer: Costumer;
+  // @IsObject()
+  // cake: Cake;
+  // @IsObject()
+  // costumer: Costumer;
 }

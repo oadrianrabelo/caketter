@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../../services/API";
 import { formatDate } from "../../../utils/formatDate";
+import { UpdateOrder } from "./UpdateOrder";
 import HeaderOne from "../../../components/HeaderOne";
 
 interface Costumer {
@@ -41,11 +42,9 @@ export function Orders() {
   const navigate = useNavigate();
 
   const searchOrder = (): void => {
-    api.get(`orders/search?q=${search}`)
-    .then((res: any) => {
+    api.get(`orders/search?q=${search}`).then((res: any) => {
       console.log(res.data);
       setOrders(res.data);
-
     });
   };
 
@@ -90,13 +89,13 @@ export function Orders() {
               <th scope="col" className="py-3 px-6 text-center">
                 #
               </th>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="py-2 px-4">
                 Bolo
               </th>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="py-2 px-4">
                 Cliente
               </th>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="py-1 px-1">
                 Preço
               </th>
               <th scope="col" className="py-3 px-6">
@@ -120,7 +119,7 @@ export function Orders() {
                   className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
                 >
                   <td className="py-4 px-6">{order.id}</td>
-                  <td className="py-4 px-6">
+                  <td className="py-2 px-3">
                     <table className="w-full text-sm text-gray-500 dark:text-gray-400">
                       <thead>
                         <tr>
@@ -152,7 +151,7 @@ export function Orders() {
                       </tbody>
                     </table>
                   </td>
-                  <td className="py-4 px-6">
+                  <td className="py-2 px-3">
                     <table className="w-full text-sm text-gray-500 dark:text-gray-400">
                       <thead>
                         <tr>
@@ -174,12 +173,20 @@ export function Orders() {
                       </tbody>
                     </table>
                   </td>
-                  <td>{order.price}</td>
-                  <td className="py-4 px-6">{formatDate(order.created_at)}</td>
-                  <td className="py-4 px-6">{formatDate(order.updated_at)}</td>
-                  <td className="py-4 px-6">{formatDate(order.delivery_date)}</td>
-                  <td className="py-4 px-1">edit</td>
-                  <td className="py-4 px-1">
+                  <td className="py-1 px-1 text-center">{order.price}</td>
+                  <td className="py-1 px-1 text-center">
+                    {formatDate(order.created_at)}
+                  </td>
+                  <td className="py-1 px-1 text-center">
+                    {formatDate(order.updated_at)}
+                  </td>
+                  <td className="py-1 px-1 text-center">
+                    {formatDate(order.delivery_date)}
+                  </td>
+                  <td className="py-1 px-1">
+                    <UpdateOrder id={order.id} />
+                  </td>
+                  <td className="py-1 px-1">
                     <button
                       type="button"
                       className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
