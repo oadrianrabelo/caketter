@@ -65,34 +65,19 @@ export class OrderService {
     });
   }
   async updateOrder(id: number, order: UpdateOrder) {
-    console.log(order);
     return this.dataService.order.update({
       where: {
         id: id,
       },
       data: {
-        cake: {
-          connect: {
-            id: order.id_cake,
-          },
-          update: {
-            dough: order.cake.dough,
-            filling: order.cake.filling,
-            size: order.cake.size,
-            theme: order.cake.theme,
-            age_top: order.cake.age_top,
-            name_top: order.cake.name_top,
-          },
-        },
-        costumer: {
-          connect: {
-            id: order.id_costumer,
-          },
-          update: {
-            name: order.costumer.name,
-            contact: order.costumer.contact,
-          },
-        },
+        ...order,
+      },
+      select: {
+        id: true,
+        cake: true,
+        costumer: true,
+        delivery_date: true,
+        price: true,
       },
     });
   }
