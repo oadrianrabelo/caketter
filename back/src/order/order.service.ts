@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common/decorators';
-import { UpdateCake } from 'src/cake/dto/update-cake.dto';
-import { UpdateCostumer } from 'src/costumer/dto/update-costumer.dto';
 import { DataService } from 'src/PrismaClient/prisma.service';
 import { CreateOrder } from './dto/create-order.dto';
 import { UpdateOrder } from './dto/update-order.dto';
