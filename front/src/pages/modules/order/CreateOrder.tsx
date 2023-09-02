@@ -5,6 +5,7 @@ import Select from "react-select";
 import Creatable from "react-select/creatable";
 import { api } from "../../../../services/API";
 import { Notification } from "../../../utils/Notification";
+import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
 
 interface Costumer {
   id: number;
@@ -70,10 +71,12 @@ export function CreateOrder() {
     });
   }, []);
   return (
-    // TODO: refactor page layout. make more beautiful 
+    // TODO: refactor page layout. make more beautiful
     <>
       <form action="$" onSubmit={handleSubmit(onSubmit)}>
-        <h1>Cliente</h1>
+        <h4 className="text-2xl text-gray-900 font-bold dark:text-white">
+          Cliente
+        </h4>
         <select
           {...register("id_costumer", {
             setValueAs: (v) => parseFloat(v),
@@ -81,9 +84,7 @@ export function CreateOrder() {
           id="select-costumer"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
-          <option disabled selected>
-            Escolha um cliente
-          </option>
+          <option disabled>Escolha um cliente</option>
           {costumers.map((costumer) => {
             return (
               <option key={costumer.id} value={costumer.id}>
@@ -92,15 +93,15 @@ export function CreateOrder() {
             );
           })}
         </select>
-        <h1>Bolo</h1>
+        <h4 className="text-2xl text-gray-900 font-bold dark:text-white">
+          Bolo
+        </h4>
         <select
           {...register("id_cake", { setValueAs: (v) => parseFloat(v) })}
           id="select-cake"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
-          <option disabled selected>
-            Escolha um bolo
-          </option>
+          <option>Escolha um bolo</option>
           {cakes.map((cake) => {
             return (
               <optgroup key={cake.id} label={`Bolo ${cake.id}`}>
@@ -112,13 +113,27 @@ export function CreateOrder() {
             );
           })}
         </select>
-        <h1>Preço</h1>
-        <input
-          {...register("price", { setValueAs: (v) => parseFloat(v) })}
-          type="number"
+        <h4 className="text-2xl text-gray-900 font-bold dark:text-white">
+          Preço
+        </h4>
+        <CurrencyInput
+          {...register("price", {
+            setValueAs: (v) =>
+              parseFloat(v.replace("R$", "").replace(",", ".")),
+          })}
+          prefix="R$"
+          decimalSeparator=","
+          groupSeparator="."
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
-        <h1>Data de entrega</h1>
-        <input {...register("delivery_date")} type="datetime-local"></input>
+        <h4 className="text-2xl text-gray-900 font-bold dark:text-white">
+          Data de entrega
+        </h4>
+        <input
+          {...register("delivery_date")}
+          type="datetime-local"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        ></input>
         <button
           type="submit"
           className="text-white bg-blue-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
