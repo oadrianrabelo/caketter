@@ -4,6 +4,7 @@ import { api } from "../../../../services/API";
 import { formatDate } from "../../../utils/formatDate";
 import { UpdateOrder } from "./UpdateOrder";
 import HeaderOne from "../../../components/HeaderOne";
+import Swal from "sweetalert2";
 
 interface Costumer {
   id: number;
@@ -47,6 +48,47 @@ export function Orders() {
       setOrders(res.data);
     });
   };
+
+  const deleteOrder = async (id: number) => {
+    const styledModal = Swal.mixin({
+      customClass: {
+        confirmButton: "focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900",
+        cancelButton: "focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-900"
+      },
+      buttonsStyling: false,
+    });
+    styledModal.fire({
+      title: "Deseja excluir este pedido?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sim",
+      cancelButtonText: "Não",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await api.delete(`order/delete/${id}`).then(() => {
+          setValue((c) => c + 1);
+          window.location.reload(), 6000;
+        });
+        styledModal.fire({
+          title: "Pedido excluído com sucesso",
+          icon: "success",
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-900"
+          }
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        styledModal.fire({
+          title: "Operação cancelada!",
+          icon: "info",
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: "focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-900"
+          }
+        });
+      }
+    });
+  }
 
   useEffect(() => {
     api.get(`orders`).then((res) => {
@@ -173,7 +215,7 @@ export function Orders() {
                       </tbody>
                     </table>
                   </td>
-                  <td className="py-1 px-1 text-center">{order.price}</td>
+                  <td className="py-1 px-2 text-center">R$ {order.price}</td>
                   <td className="py-1 px-1 text-center">
                     {formatDate(order.created_at)}
                   </td>
@@ -189,6 +231,7 @@ export function Orders() {
                   <td className="py-1 px-1">
                     <button
                       type="button"
+                      onClick={() => deleteOrder(order.id)}
                       className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                     >
                       EXCLUIR
