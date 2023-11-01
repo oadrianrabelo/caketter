@@ -9,8 +9,6 @@ RUN apt-get update && \
 WORKDIR /usr/src/app
 
 # Copie os arquivos necessários
-COPY ca-bundle.crt /etc/ssl/certs/ca-bundle.crt
-COPY ca-bundle.trust.crt /etc/ssl/certs/ca-bundle.trust.crt 
 COPY . .
 
 # Exponha as portas
@@ -20,3 +18,4 @@ EXPOSE 5432
 
 # Comando de inicialização (substitua pelos comandos específicos do seu aplicativo)
 CMD ["docker-compose", "up"]
+USER root
