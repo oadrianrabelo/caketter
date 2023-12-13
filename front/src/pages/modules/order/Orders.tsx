@@ -126,7 +126,7 @@ export function Orders() {
           />
         </div>
       </form>
-      <NewButton route="/cake/create" />
+      <NewButton route="/order/create" title="Novo Pedido" />
       {/* <button
         type="button"
         title="Novo Pedido"

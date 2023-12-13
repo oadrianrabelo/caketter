@@ -3,12 +3,12 @@ import Card from "./utils/Card";
 export default function Home() {
   return (
     <>
-      <div className="bg-[#c9f3fa] dark:bg-gray-800 border-solid border-2 border-gray-500 rounded-lg">
+      <div className="bg-[#EFEFEF] dark:bg-gray-800 border-solid border-2 border-gray-500 rounded-lg">
         <div className="container mx-auto p-8">
           <section className="mb-16 text-center">
             <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
               Bem vindo ao{" "}
-              <span className="text-[#7ad0ea] dark:text-purple-400">Caketter</span>!
+              <span className="text-[#345E59] dark:text-purple-400">Caketter</span>!
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-300">
               Transforme sua confeitaria com nossa plataforma fácil de usar.
@@ -51,15 +51,14 @@ export default function Home() {
             </p>
             <a
               href="/contact"
-              className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-full transition duration-300"
+              className="bg-[#64B6AC] text-white hover:bg-[#345E59] focus:ring-4 focus:ring-[#C0FDFB] text-white font-medium py-2 px-4 rounded-full transition duration-300"
             >
               Contate o Suporte
             </a>
           </section>
         </div>
       </div>
-      {/* 
-      </div> */}
+
     </>
   );
 }

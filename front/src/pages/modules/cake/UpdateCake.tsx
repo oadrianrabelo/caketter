@@ -2,6 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { api } from "../../../../services/API";
 import { Modal } from "../../../components/Modal";
 import { Notification } from "../../../utils/Notification";
+import { ConfirmButton } from "../../../components/ConfirmButton";
 
 interface CakeProps {
   id: number;
@@ -61,7 +62,7 @@ export function UpdateCake({ id }: CakeProps) {
       {({ handleCloseModal }) => {
         return (
           <>
-          <div className="max-w-5xl mx-auto bg-white p-16">
+            <div className="max-w-5xl mx-auto bg-white p-16">
               <form onSubmit={handleSubmit(onSubmit(handleCloseModal))}>
                 <div className="grid xl:grid-cols-2 xl:gap-2">
                   <div>
@@ -90,7 +91,7 @@ export function UpdateCake({ id }: CakeProps) {
                     </label>
                     <input
                       {...register("size", {
-                        setValueAs: v => parseFloat(v)
+                        setValueAs: (v) => parseFloat(v),
                       })}
                       type="number"
                       className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -126,9 +127,9 @@ export function UpdateCake({ id }: CakeProps) {
                       className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     />
                   </div>
-                  <button className="w-full h-full text-white mt-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Confirmar
-                  </button>
+                </div>
+                <div className="flex justify-content mt-5">
+                  <ConfirmButton text="Confirmar" />
                 </div>
               </form>
             </div>
