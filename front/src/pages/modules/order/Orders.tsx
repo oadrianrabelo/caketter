@@ -5,6 +5,7 @@ import { formatDate } from "../../../utils/formatDate";
 import { UpdateOrder } from "./UpdateOrder";
 import HeaderOne from "../../../components/HeaderOne";
 import Swal from "sweetalert2";
+import { PlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 
 interface Costumer {
   id: number;
@@ -112,17 +113,18 @@ export function Orders() {
             id="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="digite algo"
+            placeholder="Pesquisar"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         </div>
       </form>
       <button
         type="button"
-        onClick={() => navigate("/order/create")}
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        title="Novo Pedido"
+        onClick={() => navigate("/cake/create")}
+        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
       >
-        Novo pedido
+        <PlusIcon className="h-6 w-6 text-white"/>
       </button>
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-gray-500 dark:text-gray-400">
@@ -231,10 +233,11 @@ export function Orders() {
                   <td className="py-1 px-1">
                     <button
                       type="button"
+                      title="Excluir"
                       onClick={() => deleteOrder(order.id)}
                       className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                     >
-                      EXCLUIR
+                      <TrashIcon className="h-6 w-6 text-white"/>
                     </button>
                   </td>
                 </tr>
