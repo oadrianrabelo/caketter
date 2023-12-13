@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <>
-      <footer className="p-4 bg-[#e2e8f0]  dark:bg-[#1f2937] md:px-6 md:py-8 ">
+      <footer className="p-4 bg-[#FCFFFD]  dark:bg-[#1f2937] md:px-6 md:py-8 ">
         <div className="sm:flex sm:items-center sm:justify-between">
           <a
             href="https://flowbite.com/"

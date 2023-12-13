@@ -4,7 +4,7 @@
 
 @layer {
   body {
-    @apply bg-slate-200 dark:bg-[#1f2937] h-auto;
+    @apply bg-[#fcfffd] dark:bg-[#5D737E] h-auto;
   }
 }
 @layer base {

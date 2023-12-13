@@ -3,12 +3,12 @@ import Card from "./utils/Card";
 export default function Home() {
   return (
     <>
-      <div className="bg-gray-100 dark:bg-gray-800 border-solid border-2 border-gray-500 rounded-lg">
+      <div className="bg-[#c9f3fa] dark:bg-gray-800 border-solid border-2 border-gray-500 rounded-lg">
         <div className="container mx-auto p-8">
           <section className="mb-16 text-center">
             <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
               Bem vindo ao{" "}
-              <span className="text-purple-800 dark:text-purple-400">Caketter</span>!
+              <span className="text-[#7ad0ea] dark:text-purple-400">Caketter</span>!
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-300">
               Transforme sua confeitaria com nossa plataforma fácil de usar.

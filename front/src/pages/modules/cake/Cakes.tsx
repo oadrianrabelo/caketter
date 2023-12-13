@@ -7,6 +7,8 @@ import { UpdateCake } from "./UpdateCake";
 import HeaderOne from "../../../components/HeaderOne";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { PlusIcon } from "@heroicons/react/24/solid";
+import { NewButton } from "../../../components/NewButton";
+import { DeleteButton } from "../../../components/DeleteButton";
 interface Cake {
   id: number;
   dough: string;
@@ -88,14 +90,7 @@ export function Cakes() {
         />
       </div>
       </form>
-      <button
-        type="button"
-        onClick={() => navigate("/cake/create")}
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-        title="Novo Bolo"
-      >
-        <PlusIcon className="h-6 w-6 text-white"/>
-      </button>
+      <NewButton route="/cake/create"/>
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -147,14 +142,7 @@ export function Cakes() {
                     <UpdateCake id={cake.id} />
                   </td>
                   <td className="py-4 px-1">
-                    <button
-                      title="Excluir"
-                      type="button"
-                      onClick={() => deleteCake(cake.id)}
-                      className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                    >
-                      <TrashIcon className="h-6 w-6 text-white"/>
-                    </button>
+                    <DeleteButton onClick={() => deleteCake(cake.id)}/>
                   </td>
                 </tr>
               );

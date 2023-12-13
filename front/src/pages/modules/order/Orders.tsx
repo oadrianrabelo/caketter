@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../../../services/API";
 import { formatDate } from "../../../utils/formatDate";
 import { UpdateOrder } from "./UpdateOrder";
+import { NewButton } from "../../../components/NewButton";
 import HeaderOne from "../../../components/HeaderOne";
 import Swal from "sweetalert2";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { DeleteButton } from "../../../components/DeleteButton";
 
 interface Costumer {
   id: number;
@@ -53,43 +55,49 @@ export function Orders() {
   const deleteOrder = async (id: number) => {
     const styledModal = Swal.mixin({
       customClass: {
-        confirmButton: "focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900",
-        cancelButton: "focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-900"
+        confirmButton:
+          "focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900",
+        cancelButton:
+          "focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-900",
       },
       buttonsStyling: false,
     });
-    styledModal.fire({
-      title: "Deseja excluir este pedido?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Sim",
-      cancelButtonText: "Não",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        await api.delete(`order/delete/${id}`).then(() => {
-          setValue((c) => c + 1);
-          window.location.reload(), 6000;
-        });
-        styledModal.fire({
-          title: "Pedido excluído com sucesso",
-          icon: "success",
-          buttonsStyling: false,
-          customClass: {
-            confirmButton: "focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-900"
-          }
-        });
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        styledModal.fire({
-          title: "Operação cancelada!",
-          icon: "info",
-          buttonsStyling: false,
-          customClass: {
-            confirmButton: "focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-900"
-          }
-        });
-      }
-    });
-  }
+    styledModal
+      .fire({
+        title: "Deseja excluir este pedido?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sim",
+        cancelButtonText: "Não",
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          await api.delete(`order/delete/${id}`).then(() => {
+            setValue((c) => c + 1);
+            window.location.reload(), 6000;
+          });
+          styledModal.fire({
+            title: "Pedido excluído com sucesso",
+            icon: "success",
+            buttonsStyling: false,
+            customClass: {
+              confirmButton:
+                "focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-900",
+            },
+          });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          styledModal.fire({
+            title: "Operação cancelada!",
+            icon: "info",
+            buttonsStyling: false,
+            customClass: {
+              confirmButton:
+                "focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-900",
+            },
+          });
+        }
+      });
+  };
 
   useEffect(() => {
     api.get(`orders`).then((res) => {
@@ -118,14 +126,15 @@ export function Orders() {
           />
         </div>
       </form>
-      <button
+      <NewButton route="/cake/create" />
+      {/* <button
         type="button"
         title="Novo Pedido"
         onClick={() => navigate("/cake/create")}
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        className="bg-[#64B6AC] text-white hover:bg-[#345E59] focus:ring-4 focus:ring-[#C0FDFB] font-medium rounded-full text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
       >
         <PlusIcon className="h-6 w-6 text-white"/>
-      </button>
+      </button> */}
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -231,14 +240,7 @@ export function Orders() {
                     <UpdateOrder id={order.id} />
                   </td>
                   <td className="py-1 px-1">
-                    <button
-                      type="button"
-                      title="Excluir"
-                      onClick={() => deleteOrder(order.id)}
-                      className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                    >
-                      <TrashIcon className="h-6 w-6 text-white"/>
-                    </button>
+                    <DeleteButton onClick={() => deleteOrder(order.id)} />
                   </td>
                 </tr>
               );
