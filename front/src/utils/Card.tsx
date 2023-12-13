@@ -8,10 +8,10 @@ export default function Card({title, text, textButton, image, imageAlt} : any) {
 
   return (
     <>
-      <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <div className="max-w-md mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <a href="#">
           <img
-            className="rounded-t-lg"
+            className="rounded-t-lg object-cover w-full h-40"
             src={image}
             alt={imageAlt}
           />
@@ -21,7 +21,7 @@ export default function Card({title, text, textButton, image, imageAlt} : any) {
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               {title}
             </h5>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 h-20 overflow-hidden">
               {text}
             </p>
             { textButton ? (
@@ -50,6 +50,7 @@ export default function Card({title, text, textButton, image, imageAlt} : any) {
           </a>
         </div>
       </div>
+      
     </>
   );
 }

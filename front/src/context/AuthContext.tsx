@@ -83,7 +83,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
         icon: "success",
         title: `Bem Vindo!`,
       })
-      navigate('/temp')
+      navigate('/orders')
     } catch (err: any) {
       Notification.fire({
         icon: "error",

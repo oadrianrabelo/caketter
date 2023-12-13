@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../../services/API";
 import { Notification } from "../../../utils/Notification";
+import { ConfirmButton } from "../../../components/ConfirmButton";
 
 interface Costumer {
   name: string;
@@ -79,12 +80,7 @@ export function CreateCostumer() {
             </div>
           </div>
           <div>
-            <button
-              type="submit"
-              className="gruop relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            >
-              Cadastrar cliente
-            </button>
+            <ConfirmButton text="Cadastrar Cliente" crud={true}/>
           </div>
         </form>
       </div>

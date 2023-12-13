@@ -4,8 +4,11 @@ import { Notification } from "../../../utils/Notification";
 import { useNavigate } from "react-router-dom";
 import { UpdateCostumer } from "./UpdateCostumer";
 import { formatDate } from "../../../utils/formatDate";
+import { TrashIcon, PencilSquareIcon, PlusIcon } from "@heroicons/react/24/solid";
 import Swal from "sweetalert2";
 import HeaderOne from "../../../components/HeaderOne";
+import { NewButton } from "../../../components/NewButton";
+import { DeleteButton } from "../../../components/DeleteButton";
 interface Costumer {
   id: number;
   name: string;
@@ -70,26 +73,19 @@ export default function Costumers() {
           filterCostumer();
         }}
       >
-        <HeaderOne title="Clientes"/>
+        <HeaderOne title="Clientes" />
         <div className="mb-6">
           <input
             type="text"
             id="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="digite"
+            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Pesquisar"
           />
         </div>
       </form>
-
-      <button
-        type="button"
-        onClick={() => navigate("/costumer/create")}
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-      >
-        Novo cliente
-      </button>
+      <NewButton route="/costumer/create" title="Novo Cliente" />
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -133,13 +129,7 @@ export default function Costumers() {
                     <UpdateCostumer id={costumer.id} />
                   </td>
                   <td className="py-4 px-1">
-                    <button
-                      type="button"
-                      onClick={() => deleteCostumer(costumer.id)}
-                      className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                    >
-                      EXCLUIR
-                    </button>
+                    <DeleteButton onClick={() => deleteCostumer(costumer.id)}/>
                   </td>
                 </tr>
               );

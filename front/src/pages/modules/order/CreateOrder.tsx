@@ -6,6 +6,7 @@ import Creatable from "react-select/creatable";
 import { api } from "../../../../services/API";
 import { Notification } from "../../../utils/Notification";
 import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
+import { ConfirmButton } from "../../../components/ConfirmButton";
 
 interface Costumer {
   id: number;
@@ -73,7 +74,7 @@ export function CreateOrder() {
   return (
     // TODO: refactor page layout. make more beautiful
     <>
-      <form action="$" onSubmit={handleSubmit(onSubmit)}>
+      <form className="mx-auto max-w-md" action="$" onSubmit={handleSubmit(onSubmit)}>
         <h4 className="text-2xl text-gray-900 font-bold dark:text-white">
           Cliente
         </h4>
@@ -101,10 +102,10 @@ export function CreateOrder() {
           id="select-cake"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
-          <option>Escolha um bolo</option>
+          <option>Selecione</option>
           {cakes.map((cake) => {
             return (
-              <optgroup key={cake.id} label={`Bolo ${cake.id}`}>
+              <optgroup key={cake.id} label={`Bolo ${cake.theme}`}>
                 <option value={cake.id}>
                   Massa: {cake.dough}; Recheio: {cake.filling}; Nome topo:{" "}
                   {cake.name_top}
@@ -121,7 +122,8 @@ export function CreateOrder() {
             setValueAs: (v) =>
               parseFloat(v.replace("R$", "").replace(",", ".")),
           })}
-          prefix="R$"
+          placeholder="R$ 00,00"
+          prefix="R$ "
           decimalSeparator=","
           groupSeparator="."
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -132,14 +134,13 @@ export function CreateOrder() {
         <input
           {...register("delivery_date")}
           type="datetime-local"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         ></input>
-        <button
-          type="submit"
-          className="text-white bg-blue-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-        >
-          Criar pedido
-        </button>
+        <div className="text-center">
+          <ConfirmButton text="Cadastrar Pedido"
+           crud={true}/>
+
+        </div>
       </form>
     </>
   );
