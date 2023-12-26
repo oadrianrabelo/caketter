@@ -52,7 +52,7 @@ const LayoutWrapper = ({ children }: Props) => {
                   </Link>
                 ))}
               </div>
-              <ThemeSwitch />
+              {/* <ThemeSwitch /> */}
             </div>
           </header>
           <main className="mb-auto">
