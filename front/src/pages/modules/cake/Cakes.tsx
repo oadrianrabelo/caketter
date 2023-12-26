@@ -85,15 +85,15 @@ export function Cakes() {
           id="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder="Pesquisar"
         />
       </div>
       </form>
       <NewButton route="/cake/create" title="Novo Bolo"/>
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table className="w-full text-sm text-left text-gray-500">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <th scope="col" className="py-3 px-6">
                 #
@@ -128,7 +128,7 @@ export function Cakes() {
               return (
                 <tr
                   key={cake.id}
-                  className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
+                  className="bg-white border-b"
                 >
                   <td className="py-4 px-6">{cake.id}</td>
                   <td className="py-4 px-6">{cake.dough}</td>

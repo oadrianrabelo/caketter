@@ -55,23 +55,23 @@ export function UpdateCostumer({ id }: CostumerProps) {
               <form onSubmit={handleSubmit(onSubmit(handleCloseModal))}>
                 <div className="grid xl:grid-cols-2 xl:gap-2">
                   <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">
+                    <label className="block mb-2 text-sm font-medium text-gray-900">
                       Nome
                     </label>
                     <input
                       {...register("name")}
                       type="text"
-                      className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     />
                   </div>
                   <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">
+                    <label className="block mb-2 text-sm font-medium text-gray-900">
                       Contato
                     </label>
                     <input
                       {...register("contact")}
                       type="text"
-                      className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     />
                   </div>
                 </div>

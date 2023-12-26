@@ -28,21 +28,21 @@ export const Modal: React.FC<ModalProps> = ({ children, onOpen }) => {
     <>
       <button
         title="Editar"
-        className="text-white bg-[#ffb6c1] hover:bg-[#d0959e] focus:outline-none focus:ring-4 focus:ring-[#C0FDFB] font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition duration-300"
+        className="text-white bg-[#ffb6c1] hover:bg-[#d0959e] focus:outline-none focus:ring-4 focus:ring-[#C0FDFB] font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 transition duration-300"
         onClick={handleOpenModal}
       >
         <PencilSquareIcon className="h-6 w-6 text-white" />
       </button>
       {showModal ? (
         <>
-          <div className="absolute text-gray-900 dark:text-white">
+          <div className="absolute text-gray-900">
             <div className="flex justify-center  items-center  overflow-x-hidden overflow-y-hidden fixed  inset-0 z-50 outline-none focus:outline-none ">
               <div className="w-auto  mx-auto max-w-3xl ">
                 {/*content*/}
-                <div className="border-0  rounded-lg dark:bg-white shadow-lg relative flex flex-col w-full bg-white text-black outline-none focus:outline-none dark:text-white">
+                <div className="border-0  rounded-lg shadow-lg relative flex flex-col w-full bg-white text-black outline-none focus:outline-none">
                   {/*header*/}
                   <div className="flex items-start justify-between p-1 border-b border-slate-300">
-                    <h2 className="text-4xl tracking-tight font-medium  text-gray-900 dark:text-black">
+                    <h2 className="text-4xl tracking-tight font-medium  text-gray-900">
                       <svg
                         className="w-10 h-10"
                         fill="none"
@@ -70,7 +70,7 @@ export const Modal: React.FC<ModalProps> = ({ children, onOpen }) => {
                     : children}
                   <div className="flex items-center justify-end p-1 border-t border-solid border-slate-300 rounded-b">
                     <button
-                      className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
                       onClick={() => setShowModal(false)}
                     >
                       Fechar

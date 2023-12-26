@@ -20,7 +20,7 @@ export const ConfirmButton = ({ text, crud = false }: ConfirmButtonProps) => {
         <button
           type="button"
           title="Novo Pedido"
-          className="mt-5 w-1/2 h-full bg-[#64B6AC] text-white hover:bg-[#345E59] focus:ring-4 focus:ring-[#C0FDFB] font-medium rounded-full text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition duration-300"
+          className="mt-5 w-1/2 h-full bg-[#64B6AC] text-white hover:bg-[#345E59] focus:ring-4 focus:ring-[#C0FDFB] font-medium rounded-full text-sm px-3 py-2 mr-2 mb-2 transition duration-300"
         >
           {text}
         </button>

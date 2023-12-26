@@ -96,14 +96,14 @@ export function UpdateOrder({ id }: OrderProps) {
               <form onSubmit={handleSubmit(onSubmit(handleCloseModal))}>
                 <div className="grid xl:grid-cols-2 xl:gap-2">
                   <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">
+                    <label className="block mb-2 text-sm font-medium text-gray-900">
                       Cliente
                     </label>
                     <select
                       {...register("id_costumer", {
                         setValueAs: (v) => parseFloat(v),
                       })}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                     >
                       <option disabled>Escolha um cliente</option>
                       {costumers.map((costumer) => {
@@ -116,14 +116,14 @@ export function UpdateOrder({ id }: OrderProps) {
                     </select>
                   </div>
                   <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">
+                    <label className="block mb-2 text-sm font-medium text-gray-900 ">
                       Bolo
                     </label>
                     <select
                       {...register("id_cake", {
                         setValueAs: (v) => parseFloat(v),
                       })}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     >
                       <option disabled>Escolha um bolo</option>
                       {cakes.map((cake) => {
@@ -139,7 +139,7 @@ export function UpdateOrder({ id }: OrderProps) {
                     </select>
                   </div>
                   <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">
+                    <label className="block mb-2 text-sm font-medium text-gray-900">
                       Preço
                     </label>
                     <div className="relative mt-2 rounded-md shadow-sm">
@@ -151,19 +151,19 @@ export function UpdateOrder({ id }: OrderProps) {
                           setValueAs: (v) => parseFloat(v),
                         })}
                         type="number"
-                        className="pl-7 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="pl-7 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         placeholder="0.00"
                         step={0.01}
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">
+                    <label className="block mb-2 text-sm font-medium text-gray-900 ">
                       Data de entrega
                     </label>
                     <input
                       {...register("delivery_date")}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                       type="datetime-local"
                     />
                   </div>

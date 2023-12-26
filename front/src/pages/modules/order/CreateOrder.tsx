@@ -75,7 +75,7 @@ export function CreateOrder() {
     // TODO: refactor page layout. make more beautiful
     <>
       <form className="mx-auto max-w-md" action="$" onSubmit={handleSubmit(onSubmit)}>
-        <h4 className="text-2xl text-gray-900 font-bold dark:text-white">
+        <h4 className="text-2xl text-gray-900 font-bold">
           Cliente
         </h4>
         <select
@@ -83,7 +83,7 @@ export function CreateOrder() {
             setValueAs: (v) => parseFloat(v),
           })}
           id="select-costumer"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         >
           <option disabled>Escolha um cliente</option>
           {costumers.map((costumer) => {
@@ -94,13 +94,13 @@ export function CreateOrder() {
             );
           })}
         </select>
-        <h4 className="text-2xl text-gray-900 font-bold dark:text-white">
+        <h4 className="text-2xl text-gray-900 font-bold">
           Bolo
         </h4>
         <select
           {...register("id_cake", { setValueAs: (v) => parseFloat(v) })}
           id="select-cake"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         >
           <option>Selecione</option>
           {cakes.map((cake) => {
@@ -114,7 +114,7 @@ export function CreateOrder() {
             );
           })}
         </select>
-        <h4 className="text-2xl text-gray-900 font-bold dark:text-white">
+        <h4 className="text-2xl text-gray-900 font-bold">
           Preço
         </h4>
         <CurrencyInput
@@ -126,15 +126,15 @@ export function CreateOrder() {
           prefix="R$ "
           decimalSeparator=","
           groupSeparator="."
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
-        <h4 className="text-2xl text-gray-900 font-bold dark:text-white">
+        <h4 className="text-2xl text-gray-900 font-bold">
           Data de entrega
         </h4>
         <input
           {...register("delivery_date")}
           type="datetime-local"
-          className="mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         ></input>
         <div className="text-center">
           <ConfirmButton text="Cadastrar Pedido"

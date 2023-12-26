@@ -13,7 +13,7 @@ export const NewButton = ({route, title}:NewButtonProps) => {
         type="button"
         title={title}
         onClick={() => navigate(route)}
-        className="bg-[#ffb6c1] text-white hover:bg-[#d0959e] focus:ring-4 focus:ring-[#ffd0db] font-medium rounded-full text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition duration-300"
+        className="bg-[#ffb6c1] text-white hover:bg-[#d0959e] focus:ring-4 focus:ring-[#ffd0db] font-medium rounded-full text-sm px-3 py-2 mr-2 mb-2 transition duration-300"
       >
         <PlusIcon className="h-6 w-6 text-white"/>
       </button>

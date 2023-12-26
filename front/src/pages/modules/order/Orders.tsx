@@ -56,9 +56,9 @@ export function Orders() {
     const styledModal = Swal.mixin({
       customClass: {
         confirmButton:
-          "focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900",
+          "focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2",
         cancelButton:
-          "focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-900",
+          "focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2",
       },
       buttonsStyling: false,
     });
@@ -82,7 +82,7 @@ export function Orders() {
             buttonsStyling: false,
             customClass: {
               confirmButton:
-                "focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-900",
+                "focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2",
             },
           });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -92,7 +92,7 @@ export function Orders() {
             buttonsStyling: false,
             customClass: {
               confirmButton:
-                "focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-900",
+                "focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2",
             },
           });
         }
@@ -122,22 +122,14 @@ export function Orders() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Pesquisar"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           />
         </div>
       </form>
       <NewButton route="/order/create" title="Novo Pedido" />
-      {/* <button
-        type="button"
-        title="Novo Pedido"
-        onClick={() => navigate("/cake/create")}
-        className="bg-[#64B6AC] text-white hover:bg-[#345E59] focus:ring-4 focus:ring-[#C0FDFB] font-medium rounded-full text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-      >
-        <PlusIcon className="h-6 w-6 text-white"/>
-      </button> */}
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table className="w-full text-sm text-gray-500">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <th scope="col" className="py-3 px-6 text-center">
                 #
@@ -169,11 +161,11 @@ export function Orders() {
               return (
                 <tr
                   key={order.id}
-                  className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
+                  className="bg-white border-b"
                 >
                   <td className="py-4 px-6">{order.id}</td>
                   <td className="py-2 px-3">
-                    <table className="w-full text-sm text-gray-500 dark:text-gray-400">
+                    <table className="w-full text-sm text-gray-500">
                       <thead>
                         <tr>
                           <th scope="col" className="py-2 px-1">
@@ -205,7 +197,7 @@ export function Orders() {
                     </table>
                   </td>
                   <td className="py-2 px-3">
-                    <table className="w-full text-sm text-gray-500 dark:text-gray-400">
+                    <table className="w-full text-sm text-gray-500">
                       <thead>
                         <tr>
                           <th scope="col" className="py-2 px-1">

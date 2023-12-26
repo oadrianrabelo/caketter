@@ -3,18 +3,18 @@ import Card from "../utils/Card";
 export default function Home() {
   return (
     <>
-      <div className="bg-[#EFEFEF] dark:bg-gray-800 border-solid border-2 border-gray-500 rounded-lg">
+      <div className="bg-[#EFEFEF] border-solid border-2 border-gray-500 rounded-lg">
         <div className="container mx-auto p-8">
           <section className="mb-16 text-center">
-            <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
+            <h1 className="text-4xl font-bold text-gray-800 mb-4">
               Bem vindo ao{" "}
-              <span className="text-[#345E59] dark:text-purple-400">Caketter</span>!
+              <span className="text-[#345E59] ">Caketter</span>!
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300">
+            <p className="text-lg text-gray-600">
               Transforme sua confeitaria com nossa plataforma fácil de usar.
             </p>
             <p className="mt-4">
-              <a href="/signup" className="text-2xl font-bold text-blue-600 dark:text-white hover:underline">
+              <a href="/signup" className="text-2xl font-bold text-blue-600 hover:underline">
               Crie uma conta agora!
               </a>
             </p>
@@ -43,10 +43,10 @@ export default function Home() {
             />
           </ul>
           <section className="mt-16 text-center">
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
               Precisa de Ajuda ou Tem Perguntas?
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+            <p className="text-lg text-gray-600 mb-8">
               Nossa equipe de suporte está pronta para ajudar!
             </p>
             <a
