@@ -5,6 +5,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react({ include: "**/*.tsx"})],
   base: './',
+  build: {
+    cssCodeSplit: false,
+  },
   server: {
     port: 3000,
     host: true,

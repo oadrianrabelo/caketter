@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Login } from "../pages/login";
 import { SignUp } from "../pages/signup";
-import Home from "./../index";
+import Home from "../pages/home";
 import Costumers from '../pages/modules/costumer/Costumers';
 import { CreateCostumer } from '../pages/modules/costumer/CreateCostumer';
 import { CreateCake } from '../pages/modules/cake/CreateCake';
