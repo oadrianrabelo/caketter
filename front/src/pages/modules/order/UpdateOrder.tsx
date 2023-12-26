@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { api } from "../../../../services/API";
+import { api } from "../../../services/API";
 import { Notification } from "../../../utils/Notification";
 import { Modal } from "../../../components/Modal";
 import { useEffect, useState } from "react";

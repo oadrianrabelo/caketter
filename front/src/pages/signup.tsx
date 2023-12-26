@@ -1,6 +1,6 @@
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useForm } from "react-hook-form";
-import { api } from "../../services/API";
+import { api } from "../services/API";
 import { useState } from "react";
 import { Notification } from "../utils/Notification";
 import { useNavigate } from 'react-router-dom';

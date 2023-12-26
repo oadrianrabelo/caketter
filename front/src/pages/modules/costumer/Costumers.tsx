@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { api } from "../../../../services/API";
+import { api } from "../../../services/API";
 import { Notification } from "../../../utils/Notification";
 import { useNavigate } from "react-router-dom";
 import { UpdateCostumer } from "./UpdateCostumer";

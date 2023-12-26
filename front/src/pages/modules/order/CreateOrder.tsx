@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import Creatable from "react-select/creatable";
-import { api } from "../../../../services/API";
+import { api } from "../../../services/API";
 import { Notification } from "../../../utils/Notification";
 import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
 import { ConfirmButton } from "../../../components/ConfirmButton";

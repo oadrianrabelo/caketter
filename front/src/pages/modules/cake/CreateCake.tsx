@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../../../services/API";
+import { api } from "../../../services/API";
 import { Notification } from "../../../utils/Notification";
 import { ConfirmButton } from "../../../components/ConfirmButton";
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../../../services/API";
+import { api } from "../../../services/API";
 import { formatDate } from "../../../utils/formatDate";
 import { UpdateOrder } from "./UpdateOrder";
 import { NewButton } from "../../../components/NewButton";

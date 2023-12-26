@@ -1,5 +1,5 @@
 import { SetStateAction, useEffect, useState } from "react";
-import { api } from "../services/API";
+import { api } from "./services/API";
 import {} from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useAuth } from "./context/AuthContext";

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../services/API";
+import { api } from "../services/API";
 import { Notification } from "../utils/Notification";
 type SignInData = {
   email: string;

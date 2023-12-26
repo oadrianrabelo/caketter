@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { formatDate } from "../../../utils/formatDate";
-import { api } from "../../../../services/API";
+import { api } from "../../../services/API";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { UpdateCake } from "./UpdateCake";
