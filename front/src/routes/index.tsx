@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import { Login } from "../pages/login";
-import { SignUpUser } from "../pages/SignUpUser";
 import Home from "../pages/home";
 import Costumers from '../pages/modules/costumer/Costumers';
 import { CreateCostumer } from '../pages/modules/costumer/CreateCostumer';
@@ -9,6 +8,7 @@ import { Cakes } from "../pages/modules/cake/Cakes";
 import { Orders } from "../pages/modules/order/Orders";
 import { CreateOrder } from "../pages/modules/order/CreateOrder";
 import Temp from "../temp";
+import SignUpUser from "../pages/SignUpUser";
 
 const Router: React.FC = () => (
   <Routes>

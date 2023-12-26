@@ -18,7 +18,7 @@ interface IFormUser {
   password: string;
 }
 
-export function SignUpUser() {
+export default function SignUpUser() {
   const [user, setUser] = useState<User[]>([]);
   const { register, handleSubmit } = useForm<IFormUser>();
   const navigate = useNavigate();
