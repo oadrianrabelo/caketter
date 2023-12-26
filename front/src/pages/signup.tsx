@@ -28,7 +28,7 @@ export function SignUp() {
       .then(() => {
         Notification.fire({
           icon: "success",
-          title: `Conta criada com sucesso!\nBem vindo!`,
+          title: `Conta criada com sucesso!\nBem vindo !`,
         });
         navigate('/temp')
       })
