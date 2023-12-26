@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Login } from "../pages/login";
-import { SignUp } from "../pages/signup";
+import { SignUpUser } from "../pages/SignUpUser";
 import Home from "../pages/home";
 import Costumers from '../pages/modules/costumer/Costumers';
 import { CreateCostumer } from '../pages/modules/costumer/CreateCostumer';
@@ -15,7 +15,7 @@ const Router: React.FC = () => (
     <Route path="/" element={<Login />} />
     <Route path="/temp" element={<Temp />} />
     <Route path="/home" element={<Home />} />
-    <Route path="/signup" element={<SignUp />} />
+    <Route path="/signup" element={<SignUpUser />} />
     <Route path="/costumers" element={<Costumers />} />
     <Route path="/costumer/create" element={<CreateCostumer />} />
     <Route path="/cakes" element={<Cakes />} />
