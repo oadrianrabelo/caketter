@@ -9,6 +9,7 @@ import { TrashIcon } from "@heroicons/react/24/solid";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { NewButton } from "../../../components/NewButton";
 import { DeleteButton } from "../../../components/DeleteButton";
+import { useAuth } from "../../../context/AuthContext";
 interface Cake {
   id: number;
   dough: string;
@@ -25,6 +26,7 @@ export function Cakes() {
   const [cakes, setCakes] = useState<Cake[]>([]);
   const [value, setValue] = useState(0);
   const [search, setSearch] = useState("");
+  const { user } = useAuth();
 
   const navigate = useNavigate();
 
@@ -35,10 +37,10 @@ export function Cakes() {
   };
 
   useEffect(() => {
-    api.get(`cakes`).then((res) => {
+    api.get(`cakes/user?userUuid=${user?.uuid}`).then((res) => {
       setCakes(res.data);
     });
-  }, []);
+  }, [user?.uuid]);
 
   const deleteCake = async (id: number) => {
     const styledModal = Swal.mixin({
@@ -124,13 +126,13 @@ export function Cakes() {
             </tr>
           </thead>
           <tbody>
-            {cakes.map((cake) => {
+            {cakes.map((cake, index) => {
               return (
                 <tr
                   key={cake.id}
                   className="bg-white border-b"
                 >
-                  <td className="py-4 px-6">{cake.id}</td>
+                  <td className="py-4 px-6">{index + 1}</td>
                   <td className="py-4 px-6">{cake.dough}</td>
                   <td className="py-4 px-6">{cake.filling}</td>
                   <td className="py-4 px-6">{cake.size}</td>

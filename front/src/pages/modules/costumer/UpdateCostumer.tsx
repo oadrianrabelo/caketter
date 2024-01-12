@@ -3,6 +3,7 @@ import { api } from "../../../services/API";
 import { Modal } from "../../../components/Modal";
 import { Notification } from "../../../utils/Notification";
 import { ConfirmButton } from "../../../components/ConfirmButton";
+import { useAuth } from "../../../context/AuthContext";
 
 interface CostumerProps {
   id: number;
@@ -11,9 +12,13 @@ interface CostumerProps {
 interface Costumer {
   name: string;
   contact: string;
+  user_uuid: string;
 }
 
 export function UpdateCostumer({ id }: CostumerProps) {
+
+  const {user} = useAuth();
+  const userUuid = user?.uuid; 
   const { register, handleSubmit, setValue } = useForm<Costumer>();
 
   const onSubmit = (fn: () => void) => {
@@ -22,6 +27,7 @@ export function UpdateCostumer({ id }: CostumerProps) {
         await api.put(`costumer/${id}`, {
           name: data.name,
           contact: data.contact,
+          user_uuid: userUuid,
         });
         Notification.fire({
           icon: "success",
@@ -76,7 +82,7 @@ export function UpdateCostumer({ id }: CostumerProps) {
                   </div>
                 </div>
                 <div className="flex justify-center mt-5">
-                  <ConfirmButton text="Confirmar"/>
+                  <ConfirmButton crud={true} text="Confirmar"/>
                 </div>
               </form>
             </div>

@@ -28,6 +28,21 @@ export class OrderService {
     });
   }
 
+  async getOrdersByUserUuid(userUuid: string) {
+    return await this.dataService.order.findMany({
+      where: {
+        user_uuid: userUuid,
+      },
+      orderBy: {
+        created_at: 'asc',
+      },
+      include: {
+        cake: true,
+        costumer: true,
+      },
+    });
+  }
+
   async getOrderSearch(q: any) {
     return this.dataService.order.findMany({
       select: {

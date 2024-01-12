@@ -8,6 +8,7 @@ import HeaderOne from "../../../components/HeaderOne";
 import Swal from "sweetalert2";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { DeleteButton } from "../../../components/DeleteButton";
+import { useAuth } from "../../../context/AuthContext";
 
 interface Costumer {
   id: number;
@@ -42,6 +43,7 @@ export function Orders() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [value, setValue] = useState(0);
   const [search, setSearch] = useState("");
+  const { user } = useAuth();
 
   const navigate = useNavigate();
 
@@ -100,10 +102,10 @@ export function Orders() {
   };
 
   useEffect(() => {
-    api.get(`orders`).then((res) => {
+    api.get(`orders/user?userUuid=${user?.uuid}`).then((res) => {
       setOrders(res.data);
     });
-  }, []);
+  }, [user?.uuid]);
 
   return (
     <>
@@ -157,13 +159,13 @@ export function Orders() {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => {
+            {orders.map((order, index) => {
               return (
                 <tr
                   key={order.id}
                   className="bg-white border-b"
                 >
-                  <td className="py-4 px-6">{order.id}</td>
+                  <td className="py-4 px-6">{index + 1}</td>
                   <td className="py-2 px-3">
                     <table className="w-full text-sm text-gray-500">
                       <thead>

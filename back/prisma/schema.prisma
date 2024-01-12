@@ -22,6 +22,10 @@ model User {
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt()
 
+  costumer Costumer[]
+  cake     Cake[]
+  order    Order[]
+
   @@map("user")
 }
 
@@ -31,7 +35,10 @@ model Costumer {
   contact    String
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
-  Order      Order[]
+
+  Order   Order[]
+  user    User    @relation(fields: [user_uuid], references: [uuid])
+  user_uuid String
 
   @@map("costumer")
 }
@@ -48,6 +55,9 @@ model Cake {
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
 
+  user    User    @relation(fields: [user_uuid], references: [uuid])
+  user_uuid String
+
   @@map("cake")
 }
 
@@ -61,6 +71,9 @@ model Order {
   delivery_date DateTime
   created_at    DateTime  @default(now())
   updated_at    DateTime? @updatedAt
+
+  user    User    @relation(fields: [user_uuid], references: [uuid])
+  user_uuid String
 
   @@map("order")
 }

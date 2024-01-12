@@ -5,6 +5,8 @@ import { Modal } from "../../../components/Modal";
 import { useEffect, useState } from "react";
 import CurrencyInput from "react-currency-input-field";
 import { ConfirmButton } from "../../../components/ConfirmButton";
+import { useAuth } from "../../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface OrderProps {
   id: number;
@@ -38,12 +40,16 @@ interface Order {
   delivery_date: String;
   created_at: Date;
   updated_at: Date;
+  user_uuid: string;
 }
 
 export function UpdateOrder({ id }: OrderProps) {
   const { register, handleSubmit, setValue } = useForm<Order>();
   const [costumers, setCostumers] = useState<Costumer[]>([]);
   const [cakes, setCakes] = useState<Cake[]>([]);
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const user_uuid = user?.uuid;
 
   const onSubmit = (fn: () => void) => {
     const submit: SubmitHandler<Order> = async (data) => {
@@ -53,11 +59,13 @@ export function UpdateOrder({ id }: OrderProps) {
           id_cake: data.id_cake,
           id_costumer: data.id_costumer,
           price: data.price,
+          user_uuid: user_uuid,
         });
         Notification.fire({
           icon: "success",
           title: "Pedido alterado com sucesso!",
         });
+        navigate("/orders");
         window.location.reload(), 4000;
         fn();
       } catch (err: any) {
@@ -70,13 +78,13 @@ export function UpdateOrder({ id }: OrderProps) {
     return submit;
   };
   useEffect(() => {
-    api.get(`costumer`).then((res) => {
+    api.get(`costumer/user?userUuid=${user?.uuid}`).then((res) => {
       setCostumers(res.data);
     });
-    api.get(`cakes`).then((res) => {
+    api.get(`cakes/user?userUuid=${user?.uuid}`).then((res) => {
       setCakes(res.data);
     });
-  }, []);
+  }, [user?.uuid]);
   const loadData = () => {
     api.get<Order>(`order/${id}`).then((res) => {
       setValue("price", res.data.price);
@@ -169,7 +177,7 @@ export function UpdateOrder({ id }: OrderProps) {
                   </div>
                 </div>
                 <div className="flex justify-center mt-5">
-                  <ConfirmButton text="Confirmar"/>
+                  <ConfirmButton crud={true} text="Confirmar"/>
                 </div>
               </form>
             </div>

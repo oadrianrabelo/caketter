@@ -19,6 +19,11 @@ export class CakeController {
     return this.cakeService.getCake();
   }
 
+  @Get('/cakes/user')
+  getCakesByUserUuid(@Query('userUuid') userUuid: string) {
+    return this.cakeService.getCakesByUserUuid(userUuid);
+  }
+
   @Get('/cake/:id')
   getCakeById(@Param('id', ParseIntPipe) id: number) {
     return this.cakeService.getCakeById(id);

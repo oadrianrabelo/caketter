@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../../services/API";
 import { Notification } from "../../../utils/Notification";
 import { ConfirmButton } from "../../../components/ConfirmButton";
+import { useAuth } from "../../../context/AuthContext";
+import * as yup from 'yup';
 
 interface Costumer {
   name: string;
@@ -11,14 +13,29 @@ interface Costumer {
 interface IFormCostumer {
   name: string;
   contact: string;
+  user_uuid: string;
 }
 
 export function CreateCostumer() {
+
+  const {user} = useAuth();
+  const userUuid = user?.uuid; 
+
   const { register, handleSubmit } = useForm<IFormCostumer>();
+
   const navigate = useNavigate();
+
+  const costumerSchema = yup.object().shape({
+    name: yup.string().required(),
+    contact: yup.string().required(),
+  });
   const onSubmit = (data: IFormCostumer) => {
     api
-      .post(`costumer`, data)
+      .post(`costumer`, {
+        name: data.name,
+        contact: data.contact,
+        user_uuid: userUuid,
+      })
       .then(() => {
         Notification.fire({
           icon: "success",

@@ -17,6 +17,7 @@ interface User {
   name: string
   email: string
   access_token: string
+  uuid: string
 }
 
 
@@ -61,12 +62,13 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
         email: email,
         password: password,
       });
-      const { id, name, access_token, email: _email, nivel } = response.data
+      const { id, name, access_token, email: _email, uuid, nivel } = response.data
       const data = {
         id,
         name,
         email,
         access_token,
+        uuid,
       }
 
       //Injeta os dados do usuario no localStorage

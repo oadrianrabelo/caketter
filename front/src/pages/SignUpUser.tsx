@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { api } from "../services/API";
 import { useState } from "react";
 import { Notification } from "../utils/Notification";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 interface User {
   name: string;
@@ -23,6 +23,28 @@ export default function SignUpUser() {
   const { register, handleSubmit } = useForm<IFormUser>();
   const navigate = useNavigate();
   const onSubmit = (data: IFormUser) => {
+    // Check if password has min 8 characters of length
+    if (data.password.length < 8) {
+      Notification.fire({
+        icon: "error",
+        title: "Erro ao criar conta",
+        text: "A senha deve conter pelo menos 8 caracteres",
+      });
+      return;
+    }
+
+    // Check if password has special characters
+    const regex = /[!@#$%^&*(),.?":{}|<>]/;
+    if (!regex.test(data.password)) {
+      Notification.fire({
+        icon: "error",
+        title: "Erro ao criar conta",
+        text: "A senha deve conter no mínimo um caractere especial",
+      });
+      return;
+    }
+
+    // If conditions checked are true, signup
     api
       .post(`/auth/signup`, data)
       .then(() => {
@@ -30,15 +52,15 @@ export default function SignUpUser() {
           icon: "success",
           title: `Conta criada com sucesso!\nBem vindo !`,
         });
-        navigate('/temp')
+        navigate("/temp");
       })
-      .catch((err : any) => {
+      .catch((err: any) => {
         Notification.fire({
           icon: "error",
           title: `Erro ao criar conta`,
-          text: err
-        })
-      }) ;
+          text: err,
+        });
+      });
   };
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -62,7 +84,11 @@ export default function SignUpUser() {
             </a>
           </p>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)} action="$" className="mt-8 space-y-6">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          action="$"
+          className="mt-8 space-y-6"
+        >
           <input type="hidden" name="remember" value="true" />
           <div className="-space-y-px rounded-md shadow-sm">
             <div>
@@ -82,7 +108,7 @@ export default function SignUpUser() {
                 Login
               </label>
               <input
-              {...register("login")}
+                {...register("login")}
                 type="text"
                 required
                 placeholder="Login"

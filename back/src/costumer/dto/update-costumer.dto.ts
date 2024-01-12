@@ -1,4 +1,4 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class UpdateCostumer {
   @IsString()
@@ -8,4 +8,8 @@ export class UpdateCostumer {
   @IsString()
   @IsOptional()
   contact: string;
+
+  @IsUUID()
+  @IsOptional()
+  user_uuid: string;
 }

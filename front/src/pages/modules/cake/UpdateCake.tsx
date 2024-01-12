@@ -129,7 +129,7 @@ export function UpdateCake({ id }: CakeProps) {
                   </div>
                 </div>
                 <div className="flex justify-content mt-5">
-                  <ConfirmButton text="Confirmar" />
+                  <ConfirmButton crud={true} text="Confirmar" />
                 </div>
               </form>
             </div>

@@ -19,6 +19,16 @@ export class CakeService {
   async getCake() {
     return await this.dataService.cake.findMany();
   }
+  async getCakesByUserUuid(userUuid: string) {
+    return await this.dataService.cake.findMany({
+      where: {
+        user_uuid: userUuid,
+      },
+      orderBy: {
+        created_at: 'asc',
+      },
+    });
+  }
 
   async getCakeSearch(q: any) {
     return this.dataService.cake.findMany({
