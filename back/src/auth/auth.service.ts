@@ -64,6 +64,7 @@ export class AuthService {
       email: user.email,
       name: user.name,
       login: user.login,
+      uuid: user.uuid,
     };
   }
 

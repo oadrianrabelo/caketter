@@ -1,4 +1,4 @@
-import { IsDate, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsDate, IsNotEmpty, IsNumber, IsUUID } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class CreateOrder {
@@ -18,4 +18,8 @@ export class CreateOrder {
   @IsNotEmpty()
   @Type(() => Date)
   delivery_date: Date;
+
+  @IsUUID()
+  @IsNotEmpty()
+  user_uuid: string;
 }

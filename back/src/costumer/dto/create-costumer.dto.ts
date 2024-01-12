@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { User } from '@prisma/client';
+import { IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator';
 
 export class CreateCostumer {
   @IsString()
@@ -8,4 +9,8 @@ export class CreateCostumer {
   @IsString()
   @IsNotEmpty()
   contact: string;
+
+  @IsUUID()
+  @IsNotEmpty()
+  user_uuid: string;
 }

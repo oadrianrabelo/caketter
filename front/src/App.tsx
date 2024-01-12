@@ -11,9 +11,9 @@ function App() {
       <AuthProvider>
         <ThemeProvider>
           <LayoutWrapper>
-            {/* <ProtectedRoute> */}
+            <ProtectedRoute>
             <Router />
-            {/* </ProtectedRoute> */}
+            </ProtectedRoute>
           </LayoutWrapper>
         </ThemeProvider>
       </AuthProvider>

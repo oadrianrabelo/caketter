@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 
 export class CreateCake {
   @IsString()
@@ -24,4 +30,8 @@ export class CreateCake {
   @IsString()
   @IsOptional()
   age_top: string;
+
+  @IsUUID()
+  @IsNotEmpty()
+  user_uuid: string;
 }

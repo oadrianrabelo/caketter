@@ -7,6 +7,7 @@ import { api } from "../../../services/API";
 import { Notification } from "../../../utils/Notification";
 import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
 import { ConfirmButton } from "../../../components/ConfirmButton";
+import { useAuth } from "../../../context/AuthContext";
 
 interface Costumer {
   id: number;
@@ -37,6 +38,7 @@ interface IFormOrder {
   id_costumer: number;
   price: number;
   delivery_date: Date;
+  user_uuid: string;
 }
 
 export function CreateOrder() {
@@ -44,10 +46,19 @@ export function CreateOrder() {
   const [cakes, setCakes] = useState<Cake[]>([]);
   const { register, handleSubmit } = useForm<IFormOrder>();
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const user_uuid = user?.uuid;
 
   const onSubmit = (data: IFormOrder) => {
     api
-      .post(`order/create`, data)
+      .post(`order/create`, 
+      {
+        id_cake: data.id_cake,
+        id_costumer: data.id_costumer,
+        price: data.price,
+        delivery_date: data.delivery_date,
+        user_uuid: user_uuid,
+      })
       .then(() => {
         Notification.fire({
           icon: "success",
@@ -64,10 +75,10 @@ export function CreateOrder() {
       });
   };
   useEffect(() => {
-    api.get(`costumer`).then((res: any) => {
+    api.get(`costumer/user?userUuid=${user?.uuid}`).then((res: any) => {
       setCostumers(res.data);
     });
-    api.get(`cakes`).then((res) => {
+    api.get(`cakes/user?userUuid=${user?.uuid}`).then((res: any) => {
       setCakes(res.data);
     });
   }, []);
@@ -102,7 +113,7 @@ export function CreateOrder() {
           id="select-cake"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         >
-          <option>Selecione</option>
+          <option disabled>Selecione</option>
           {cakes.map((cake) => {
             return (
               <optgroup key={cake.id} label={`Bolo ${cake.theme}`}>

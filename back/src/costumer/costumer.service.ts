@@ -10,7 +10,9 @@ export class CostumerService {
   async createCostumer(costumer: CreateCostumer) {
     const createCostumer = await this.dataService.costumer.create({
       data: {
-        ...costumer,
+        name: costumer.name,
+        contact: costumer.contact,
+        user_uuid: costumer.user_uuid,
       },
     });
     return createCostumer;
@@ -18,6 +20,17 @@ export class CostumerService {
 
   async getCostumer() {
     return await this.dataService.costumer.findMany({
+      orderBy: {
+        created_at: 'asc',
+      },
+    });
+  }
+
+  async getCostumersByUserUuid(userUuid: string) {
+    return await this.dataService.costumer.findMany({
+      where: {
+        user_uuid: userUuid,
+      },
       orderBy: {
         created_at: 'asc',
       },
@@ -52,11 +65,14 @@ export class CostumerService {
         id: id,
       },
       data: {
-        ...costumer,
+        name: costumer.name,
+        contact: costumer.contact,
+        user_uuid: costumer.user_uuid,
       },
       select: {
         name: true,
         contact: true,
+        user_uuid: true,
       },
     });
   }

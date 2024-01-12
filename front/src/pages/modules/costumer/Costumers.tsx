@@ -9,18 +9,21 @@ import Swal from "sweetalert2";
 import HeaderOne from "../../../components/HeaderOne";
 import { NewButton } from "../../../components/NewButton";
 import { DeleteButton } from "../../../components/DeleteButton";
+import { useAuth } from "../../../context/AuthContext";
 interface Costumer {
   id: number;
   name: string;
   contact: string;
   created_at: Date;
   updated_at: Date;
+  id_user: number;
 }
 
 export default function Costumers() {
   const [costumers, setCostumers] = useState<Costumer[]>([]);
   const [value, setValue] = useState(0);
   const [search, setSearch] = useState("");
+  const {user} = useAuth();
 
   const navigate = useNavigate();
   const filterCostumer = () => {
@@ -61,10 +64,10 @@ export default function Costumers() {
   };
 
   useEffect(() => {
-    api.get(`costumer`).then((res) => {
+    api.get(`costumer/user?userUuid=${user?.uuid}`).then((res) => {
       setCostumers(res.data);
     });
-  }, []);
+  }, [user?.uuid]);
   return (
     <>
       <form
@@ -110,13 +113,13 @@ export default function Costumers() {
             </tr>
           </thead>
           <tbody>
-            {costumers.map((costumer) => {
+            {costumers.map((costumer, index) => {
               return (
                 <tr
                   key={costumer.id}
                   className="bg-white border-b"
                 >
-                  <td className="py-4 px-6">{costumer.id}</td>
+                  <td className="py-4 px-6">{index + 1}</td>
                   <td className="py-4 px-6">{costumer.name}</td>
                   <td className="py-4 px-6">{costumer.contact}</td>
                   <td className="py-4 px-6">

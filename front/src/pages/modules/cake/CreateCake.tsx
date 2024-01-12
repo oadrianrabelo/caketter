@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../../services/API";
 import { Notification } from "../../../utils/Notification";
 import { ConfirmButton } from "../../../components/ConfirmButton";
+import { useAuth } from "../../../context/AuthContext";
 
 interface Cake {
   dough: string;
@@ -19,14 +20,28 @@ interface IFormCake {
   theme: string;
   name_top: string;
   age_top: string;
+  user_uuid: string;
 }
 
 export function CreateCake() {
   const { register, handleSubmit } = useForm<IFormCake>();
   const navigate = useNavigate();
+  
+  const { user } = useAuth();
+  const user_uuid = user?.uuid;
+
   const onSubmit = (data: IFormCake) => {
     api
-      .post(`cake/create`, data)
+      .post(`cake/create`, 
+      {
+        dough: data.dough,
+        filling: data.filling,
+        size: data.size,
+        theme: data.theme,
+        name_top: data.name_top,
+        age_top: data.age_top,
+        user_uuid: user_uuid,
+      })
       .then(() => {
         Notification.fire({
           icon: "success",

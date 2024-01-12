@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { Delete, Get, Param, Query, Put } from '@nestjs/common/decorators';
-import { ParseIntPipe } from '@nestjs/common/pipes';
+import { ParseIntPipe, ParseUUIDPipe } from '@nestjs/common/pipes';
 import { CostumerService } from './costumer.service';
 import { CreateCostumer } from './dto/create-costumer.dto';
 import { UpdateCostumer } from './dto/update-costumer.dto';
@@ -18,6 +18,11 @@ export class CostumerController {
   @Get()
   getCostumer() {
     return this.costumerService.getCostumer();
+  }
+
+  @Get('/user')
+  getCostumersByUserUuid(@Query('userUuid') userUuid: string) {
+    return this.costumerService.getCostumersByUserUuid(userUuid);
   }
 
   @Get('search')
