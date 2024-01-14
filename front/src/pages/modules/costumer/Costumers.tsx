@@ -4,12 +4,13 @@ import { Notification } from "../../../utils/Notification";
 import { useNavigate } from "react-router-dom";
 import { UpdateCostumer } from "./UpdateCostumer";
 import { formatDate } from "../../../utils/formatDate";
-import { TrashIcon, PencilSquareIcon, PlusIcon } from "@heroicons/react/24/solid";
 import Swal from "sweetalert2";
 import HeaderOne from "../../../components/HeaderOne";
 import { NewButton } from "../../../components/NewButton";
 import { DeleteButton } from "../../../components/DeleteButton";
 import { useAuth } from "../../../context/AuthContext";
+import { usePagination } from "../../../components/Pagination";
+import PaginationButtons from "../../../components/PaginationButtons";
 interface Costumer {
   id: number;
   name: string;
@@ -23,12 +24,31 @@ export default function Costumers() {
   const [costumers, setCostumers] = useState<Costumer[]>([]);
   const [value, setValue] = useState(0);
   const [search, setSearch] = useState("");
-  const {user} = useAuth();
+  const { user } = useAuth();
+  const {
+    currentPage,
+    firstIndex,
+    elementsPerPage,
+    currentElements,
+    isPreviousDisabled,
+    isNextDisabled,
+    setCurrentPage,
+    setElementsPerPage,
+    goToPreviousPage,
+    goToNextPage,
+  } = usePagination({
+    initialPage: 1,
+    initialElementsPerPage: 5,
+    totalElements: costumers.length,
+    elements: costumers,
+  });
 
   const navigate = useNavigate();
+
   const filterCostumer = () => {
     api.get(`costumer/search?q=${search}`).then((res: any) => {
       setCostumers(res.data);
+      setCurrentPage(1);
     });
   };
 
@@ -68,6 +88,10 @@ export default function Costumers() {
       setCostumers(res.data);
     });
   }, [user?.uuid]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [elementsPerPage]);
   return (
     <>
       <form
@@ -113,13 +137,11 @@ export default function Costumers() {
             </tr>
           </thead>
           <tbody>
-            {costumers.map((costumer, index) => {
+            {currentElements.map((costumer, index) => {
+              const currentIndex = firstIndex + index + 1;
               return (
-                <tr
-                  key={costumer.id}
-                  className="bg-white border-b"
-                >
-                  <td className="py-4 px-6">{index + 1}</td>
+                <tr key={costumer.id} className="bg-white border-b">
+                  <td className="py-4 px-6">{currentIndex}</td>
                   <td className="py-4 px-6">{costumer.name}</td>
                   <td className="py-4 px-6">{costumer.contact}</td>
                   <td className="py-4 px-6">
@@ -132,7 +154,7 @@ export default function Costumers() {
                     <UpdateCostumer id={costumer.id} />
                   </td>
                   <td className="py-4 px-1">
-                    <DeleteButton onClick={() => deleteCostumer(costumer.id)}/>
+                    <DeleteButton onClick={() => deleteCostumer(costumer.id)} />
                   </td>
                 </tr>
               );
@@ -140,6 +162,12 @@ export default function Costumers() {
           </tbody>
         </table>
       </div>
+      <PaginationButtons
+        goToPreviousPage={goToPreviousPage}
+        goToNextPage={goToNextPage}
+        isPreviousDisabled={isPreviousDisabled}
+        isNextDisabled={isNextDisabled}
+       />
     </>
   );
 }

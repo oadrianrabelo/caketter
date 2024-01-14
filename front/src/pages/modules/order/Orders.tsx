@@ -9,6 +9,8 @@ import Swal from "sweetalert2";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { DeleteButton } from "../../../components/DeleteButton";
 import { useAuth } from "../../../context/AuthContext";
+import { usePagination } from "../../../components/Pagination";
+import PaginationButtons from "../../../components/PaginationButtons";
 
 interface Costumer {
   id: number;
@@ -44,6 +46,24 @@ export function Orders() {
   const [value, setValue] = useState(0);
   const [search, setSearch] = useState("");
   const { user } = useAuth();
+
+  const {
+    currentPage,
+    firstIndex,
+    elementsPerPage,
+    currentElements,
+    isPreviousDisabled,
+    isNextDisabled,
+    setCurrentPage,
+    setElementsPerPage,
+    goToPreviousPage,
+    goToNextPage,
+  } = usePagination({
+    initialPage: 1,
+    initialElementsPerPage: 5,
+    totalElements: orders.length,
+    elements: orders,
+  });
 
   const navigate = useNavigate();
 
@@ -159,13 +179,14 @@ export function Orders() {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order, index) => {
+            {currentElements.map((order, index) => {
+              const currentIndex = firstIndex + index + 1;
               return (
                 <tr
                   key={order.id}
                   className="bg-white border-b"
                 >
-                  <td className="py-4 px-6">{index + 1}</td>
+                  <td className="py-4 px-6">{currentIndex}</td>
                   <td className="py-2 px-3">
                     <table className="w-full text-sm text-gray-500">
                       <thead>
@@ -242,6 +263,12 @@ export function Orders() {
           </tbody>
         </table>
       </div>
+      <PaginationButtons
+        goToPreviousPage={goToPreviousPage}
+        goToNextPage={goToNextPage}
+        isPreviousDisabled={isPreviousDisabled}
+        isNextDisabled={isNextDisabled}
+       />
     </>
   );
 }
