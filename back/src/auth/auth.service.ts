@@ -1,4 +1,9 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { AuthDto } from './dto/auth.dto';
@@ -16,6 +21,35 @@ export class AuthService {
 
   async signUp(dto: AuthDto) {
     try {
+      if (dto.password.length < 8) {
+        throw new ForbiddenException(
+          'A senha deve conter pelo menos 8 caracteres',
+        );
+      }
+
+      const passwordRegex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/;
+      if (!passwordRegex.test(dto.password)) {
+        throw new ForbiddenException(
+          'A senha deve conter letras maiúsculas, minúsculas e caracteres especiais',
+        );
+      }
+
+      const existingUser = await this.prisma.user.findUnique({
+        where: {
+          email: dto.email,
+        },
+      });
+
+      if (existingUser) {
+        throw new ForbiddenException('O e-mail já está em uso');
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailRegex.test(dto.email)) {
+        throw new ForbiddenException('Formato de e-mail inválido');
+      }
       const password = await argon.hash(dto.password);
       const user = await this.prisma.user.create({
         data: {
@@ -27,11 +61,17 @@ export class AuthService {
       });
       return this.signToken(user.uuid, user.email);
     } catch (error) {
+      if (error instanceof ForbiddenException) {
+        throw error;
+      }
       if (error instanceof PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
-          throw new ForbiddenException('Credentials taken');
+          throw new ForbiddenException(
+            'Usuário já está em uso, tente outro e-mail',
+          );
         }
       }
+      throw new InternalServerErrorException('Falha ao criar usuário');
     }
   }
 
@@ -51,11 +91,11 @@ export class AuthService {
       },
     });
 
-    if (!user) throw new ForbiddenException('Incorrect email');
+    if (!user) throw new ForbiddenException('Email inválido');
 
     const passwordMatch = await argon.verify(user.password, dto.password);
 
-    if (!passwordMatch) throw new ForbiddenException('Invalid password');
+    if (!passwordMatch) throw new ForbiddenException('Senha inválida');
 
     const { access_token } = await this.signToken(user.uuid, user.email);
     return {
@@ -77,6 +117,10 @@ export class AuthService {
       email,
     };
     const secret = this.config.get('JWT_SECRET');
+
+    if (!secret) {
+      throw new ForbiddenException('Configuração JWT_SECRET ausente');
+    }
 
     const token = await this.jwt.signAsync(payload, {
       expiresIn: '15m',
