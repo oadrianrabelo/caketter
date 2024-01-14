@@ -13,8 +13,6 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
       navigate("/")
     } else if (!storagedToken) {
       navigate('/signup')
-    } else {
-      navigate("/temp");
     }
   }, [storagedToken]);
   return children;
