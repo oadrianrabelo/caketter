@@ -11,35 +11,31 @@ interface Props {
   children: React.ReactNode;
 }
 
-
 interface User {
-  id: string
-  name: string
-  email: string
-  access_token: string
-  uuid: string
+  id: string;
+  name: string;
+  email: string;
+  access_token: string;
+  uuid: string;
 }
 
-
 interface AuthContextData {
-
   signed: boolean;
   user: User | null;
   login: (credentials: SignInData) => Promise<void>;
   logout(): void;
   loadingAuth: boolean;
-  loading: boolean
-  error: string
-
+  loading: boolean;
+  error: string;
 }
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [loadingAuth, setLoadingAuth] = useState(false)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-  const navigate = useNavigate()
+  const [loadingAuth, setLoadingAuth] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadStoragedData() {
@@ -52,24 +48,33 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
           "Authorization"
         ] = `Bearer ${storagedToken}`;
       }
-      setLoading(false)
+      setLoading(false);
     }
     loadStoragedData();
   }, []);
+
+
   async function login({ email, password }: SignInData) {
     try {
       const response = await api.post("/auth/signin", {
         email: email,
         password: password,
       });
-      const { id, name, access_token, email: _email, uuid, nivel } = response.data
+      const {
+        id,
+        name,
+        access_token,
+        email: _email,
+        uuid,
+        nivel,
+      } = response.data;
       const data = {
         id,
         name,
         email,
         access_token,
         uuid,
-      }
+      };
 
       //Injeta os dados do usuario no localStorage
       setUser(data);
@@ -77,40 +82,60 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
       localStorage.setItem("@App:token", access_token);
 
       //Injeta no header de autorização do usuario o access_token para identificar user por requisição.
-      api.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${access_token}`;
-      setError('')
+      api.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
+      setError("");
       Notification.fire({
         icon: "success",
         title: `Bem Vindo!`,
-      })
-      navigate('/orders')
+      });
+      navigate("/orders");
+      setLoading(false);
     } catch (err: any) {
-      Notification.fire({
-        icon: "error",
-        title: `Credenciais Incorretas`,
-      })
+      if (err.response && err.response.data) {
+        Notification.fire({
+          icon: "error",
+          title: err.response.data.message || "Erro de autenticação",
+        });
+      } else {
+        Notification.fire({
+          icon: "error",
+          title: `Credenciais Incorretas`,
+        });
+      }
     }
   }
 
-
   function logout() {
     try {
-      localStorage.clear()
-      navigate('/')
+      setLoadingAuth(true);
+      localStorage.clear();
+      setUser(null);
+      navigate("/");
     } catch (e: any) {
-      setError(e.response.data.message)
+      console.error("Error during logout", error);
+      setError(e.response.data.message);
+    } finally {
+      setLoadingAuth(false);
     }
   }
 
   return (
-    <AuthContext.Provider value={{ signed: !!user, user, login, logout, loadingAuth, loading, error }}>
+    <AuthContext.Provider
+      value={{
+        signed: !!user,
+        user,
+        login,
+        logout,
+        loadingAuth,
+        loading,
+        error,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
-export { AuthContext }
+export { AuthContext };
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
