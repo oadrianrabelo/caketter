@@ -10,6 +10,8 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import { NewButton } from "../../../components/NewButton";
 import { DeleteButton } from "../../../components/DeleteButton";
 import { useAuth } from "../../../context/AuthContext";
+import { usePagination } from "../../../components/Pagination";
+import PaginationButtons from "../../../components/PaginationButtons";
 interface Cake {
   id: number;
   dough: string;
@@ -27,6 +29,23 @@ export function Cakes() {
   const [value, setValue] = useState(0);
   const [search, setSearch] = useState("");
   const { user } = useAuth();
+  const {
+    currentPage,
+    firstIndex,
+    elementsPerPage,
+    currentElements,
+    isPreviousDisabled,
+    isNextDisabled,
+    setCurrentPage,
+    setElementsPerPage,
+    goToPreviousPage,
+    goToNextPage,
+  } = usePagination({
+    initialPage: 1,
+    initialElementsPerPage: 5,
+    totalElements: cakes.length,
+    elements: cakes,
+  });
 
   const navigate = useNavigate();
 
@@ -126,13 +145,14 @@ export function Cakes() {
             </tr>
           </thead>
           <tbody>
-            {cakes.map((cake, index) => {
+            {currentElements.map((cake, index) => {
+              const currentIndex = firstIndex + index + 1;
               return (
                 <tr
                   key={cake.id}
                   className="bg-white border-b"
                 >
-                  <td className="py-4 px-6">{index + 1}</td>
+                  <td className="py-4 px-6">{currentIndex}</td>
                   <td className="py-4 px-6">{cake.dough}</td>
                   <td className="py-4 px-6">{cake.filling}</td>
                   <td className="py-4 px-6">{cake.size}</td>
@@ -152,6 +172,12 @@ export function Cakes() {
           </tbody>
         </table>
       </div>
+      <PaginationButtons
+        goToPreviousPage={goToPreviousPage}
+        goToNextPage={goToNextPage}
+        isPreviousDisabled={isPreviousDisabled}
+        isNextDisabled={isNextDisabled}
+       />
     </>
   );
 }
