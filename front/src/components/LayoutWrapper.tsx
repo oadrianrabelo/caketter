@@ -58,13 +58,13 @@ const LayoutWrapper = ({ children }: Props) => {
                       {link.title}
                     </Link>
                   ))}
-                  <a
+                  <Link
                     onClick={handleLogout}
                     href="#"
-                    className="p-1 font-medium text-gray-900 sm:p-4"
+                    className="p-1 font-medium text-red-700 sm:p-4"
                   >
                     Sair
-                  </a>
+                  </Link>
                 </div>
                 {/* <ThemeSwitch /> */}
               </div>
