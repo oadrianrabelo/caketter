@@ -268,6 +268,8 @@ export function Orders() {
         goToNextPage={goToNextPage}
         isPreviousDisabled={isPreviousDisabled}
         isNextDisabled={isNextDisabled}
+        elementsPerPage={elementsPerPage}
+        onElementsPerPageChange={setElementsPerPage}
        />
     </>
   );

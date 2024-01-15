@@ -167,6 +167,8 @@ export default function Costumers() {
         goToNextPage={goToNextPage}
         isPreviousDisabled={isPreviousDisabled}
         isNextDisabled={isNextDisabled}
+        elementsPerPage={5}
+        onElementsPerPageChange={setElementsPerPage}
        />
     </>
   );
