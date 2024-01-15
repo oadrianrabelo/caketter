@@ -30,11 +30,11 @@ const headerNavLinks = [
 
 const LayoutWrapper = ({ children }: Props) => {
   const { logout, signed } = useAuth();
-
   function handleLogout() {
     logout();
   }
   return (
+    
     <>
       <SectionContainer>
         <div className="flex h-screen w-auto flex-col justify-between ">

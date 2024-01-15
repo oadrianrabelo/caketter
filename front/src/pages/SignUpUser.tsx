@@ -4,7 +4,6 @@ import { api } from "../services/API";
 import { useState } from "react";
 import { Notification } from "../utils/Notification";
 import { useNavigate } from "react-router-dom";
-
 interface User {
   name: string;
   login: string;
@@ -16,13 +15,27 @@ interface IFormUser {
   login: string;
   email: string;
   password: string;
+  confirmPassword: string;
 }
 
 export default function SignUpUser() {
   const [user, setUser] = useState<User[]>([]);
-  const { register, handleSubmit } = useForm<IFormUser>();
+  const { register, handleSubmit, watch } = useForm<IFormUser>();
   const navigate = useNavigate();
+
+
   const onSubmit = (data: IFormUser) => {
+    
+    // Check passwords
+    if (data.password !== data.confirmPassword) {
+      Notification.fire({
+        icon: 'error',
+        title: 'Erro ao criar conta',
+        text: 'A senha e a confirmação de senha não coincidem',
+      });
+      return;
+    }
+
     // Check if password has min 8 characters of length
     if (data.password.length < 8) {
       Notification.fire({
@@ -50,15 +63,20 @@ export default function SignUpUser() {
       .then(() => {
         Notification.fire({
           icon: "success",
-          title: `Conta criada com sucesso!\nBem vindo !`,
+          title: `Conta criada com sucesso!`,
+          text: `Faça login para entrar no Caketter!`,
+          timer: 0,
+          showCloseButton: true,
         });
-        navigate("/temp");
+        navigate("/");
       })
       .catch((err: any) => {
         Notification.fire({
           icon: "error",
           title: `Erro ao criar conta`,
-          text: err,
+          timer: 3000,
+          showCloseButton: true,
+          text: err.response.data.message || "Erro desconhecido",
         });
       });
   };
@@ -134,6 +152,16 @@ export default function SignUpUser() {
                 type="password"
                 required
                 placeholder="Senha"
+                className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus: outline-none focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label htmlFor="confirmPassword" className="sr-only"></label>
+              <input
+                {...register("confirmPassword")}
+                type="password"
+                required
+                placeholder="Confirmar Senha"
                 className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus: outline-none focus:ring-indigo-500 sm:text-sm"
               />
             </div>
