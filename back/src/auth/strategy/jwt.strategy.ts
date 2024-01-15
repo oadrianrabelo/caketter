@@ -3,6 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { ConfigService } from '@nestjs/config';
 import { DataService } from '../../PrismaClient/prisma.service';
+import * as _ from 'lodash';
 
 @Injectable({})
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
@@ -14,14 +15,22 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   }
 
   async validate(payload: { sub: number; email: string }) {
-    const user = await this.prisma.user.findUnique({
-      where: {
-        id: payload.sub,
-      },
-    });
+    try {
+      const user = await this.prisma.user.findUnique({
+        where: {
+          id: payload.sub,
+        },
+      });
 
-    delete user.password;
+      if (!user) {
+        throw new Error('Usuário não encontrado');
+      }
 
-    return user;
+      const userWithoutPassword = _.omit(user, 'password');
+
+      return userWithoutPassword;
+    } catch (error) {
+      throw new Error(`Erro ao validar usuário: ${error.message}`);
+    }
   }
 }
