@@ -177,6 +177,8 @@ export function Cakes() {
         goToNextPage={goToNextPage}
         isPreviousDisabled={isPreviousDisabled}
         isNextDisabled={isNextDisabled}
+        elementsPerPage={elementsPerPage}
+        onElementsPerPageChange={setElementsPerPage}
        />
     </>
   );
