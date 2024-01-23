@@ -12,12 +12,15 @@ export class CostumerService {
       data: {
         name: costumer.name,
         contact: costumer.contact,
+        email: costumer.email,
+        street: costumer.street,
+        neighborhood: costumer.neighborhood,
+        number: costumer.number,
         user_uuid: costumer.user_uuid,
       },
     });
     return createCostumer;
   }
-
   async getCostumer() {
     return await this.dataService.costumer.findMany({
       orderBy: {
@@ -55,6 +58,10 @@ export class CostumerService {
       select: {
         name: true,
         contact: true,
+        email: true,
+        street: true,
+        neighborhood: true,
+        number: true,
       },
     });
   }
@@ -67,11 +74,18 @@ export class CostumerService {
       data: {
         name: costumer.name,
         contact: costumer.contact,
-        user_uuid: costumer.user_uuid,
+        email: costumer.email,
+        street: costumer.street,
+        neighborhood: costumer.neighborhood,
+        number: costumer.number,
       },
       select: {
         name: true,
         contact: true,
+        email: true,
+        street: true,
+        neighborhood: true,
+        number: true,
         user_uuid: true,
       },
     });

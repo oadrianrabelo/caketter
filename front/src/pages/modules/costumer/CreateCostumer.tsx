@@ -4,22 +4,30 @@ import { api } from "../../../services/API";
 import { Notification } from "../../../utils/Notification";
 import { ConfirmButton } from "../../../components/ConfirmButton";
 import { useAuth } from "../../../context/AuthContext";
-import * as yup from 'yup';
+import * as yup from "yup";
 
 interface Costumer {
   name: string;
   contact: string;
+  email: string;
+  street: string;
+  neighborhood: string;
+  number: string;
 }
 interface IFormCostumer {
   name: string;
   contact: string;
+  email: string;
+  street: string;
+  neighborhood: string;
+  number: string;
+  address_id: number;
   user_uuid: string;
 }
 
 export function CreateCostumer() {
-
-  const {user} = useAuth();
-  const userUuid = user?.uuid; 
+  const { user } = useAuth();
+  const userUuid = user?.uuid;
 
   const { register, handleSubmit } = useForm<IFormCostumer>();
 
@@ -34,6 +42,10 @@ export function CreateCostumer() {
       .post(`costumer`, {
         name: data.name,
         contact: data.contact,
+        email: data.email,
+        street: data.street,
+        neighborhood: data.neighborhood,
+        number: data.number,
         user_uuid: userUuid,
       })
       .then(() => {
@@ -92,12 +104,58 @@ export function CreateCostumer() {
                 type="text"
                 required
                 placeholder="Contato do cliente"
+                className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus: outline-none focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="sr-only">
+                E-mail
+              </label>
+              <input
+                {...register("email")}
+                placeholder="E-mail"
+                type="text"
+                className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus: outline-none focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div className="rounded-md flex flex-wrap">
+              <div className="w-3/4 pr-2">
+                <label htmlFor="avenue" className="sr-only">
+                  Avenida
+                </label>
+                <input
+                  {...register("street")}
+                  type="text"
+                  placeholder="Avenida"
+                  className="relative block w-full appearance-none rounded-r-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+              <div className="w-1/4 pl-2">
+                <label htmlFor="number" className="sr-only">
+                  Número
+                </label>
+                <input
+                  {...register("number")}
+                  type="text"
+                  placeholder="Número"
+                  className="relative block w-full appearance-none rounded-l-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="neighborhood" className="sr-only">
+                Bairro
+              </label>
+              <input
+                {...register("neighborhood")}
+                type="text"
+                placeholder="Bairro"
                 className="relative block w-full appearance-none rounded-b border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus: outline-none focus:ring-indigo-500 sm:text-sm"
               />
             </div>
           </div>
           <div>
-            <ConfirmButton text="Cadastrar Cliente" crud={true}/>
+            <ConfirmButton text="Cadastrar Cliente" crud={true} />
           </div>
         </form>
       </div>
