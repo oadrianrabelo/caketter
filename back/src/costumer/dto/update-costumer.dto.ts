@@ -15,7 +15,15 @@ export class UpdateCostumer {
 
   @IsString()
   @IsOptional()
-  address: string;
+  street: string;
+
+  @IsString()
+  @IsOptional()
+  number: string;
+
+  @IsString()
+  @IsOptional()
+  neighborhood: string;
 
   @IsUUID()
   @IsOptional()

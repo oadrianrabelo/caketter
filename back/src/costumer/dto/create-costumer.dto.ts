@@ -1,4 +1,3 @@
-import { Address } from '@prisma/client';
 import {
   IsNotEmpty,
   IsNumber,
@@ -7,9 +6,7 @@ import {
   IsString,
   IsUUID,
 } from 'class-validator';
-
 export class CreateCostumer {
-  [x: string]: number;
   @IsString()
   @IsNotEmpty()
   name: string;
@@ -22,13 +19,17 @@ export class CreateCostumer {
   @IsOptional()
   email: string;
 
-  @IsObject()
+  @IsString()
   @IsOptional()
-  address: Address;
+  street: string;
 
-  @IsNumber()
+  @IsString()
   @IsOptional()
-  address_id: number;
+  number: string;
+
+  @IsString()
+  @IsOptional()
+  neighborhood: string;
 
   @IsUUID()
   @IsNotEmpty()

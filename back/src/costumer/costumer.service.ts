@@ -9,29 +9,18 @@ export class CostumerService {
 
   async createCostumer(costumer: CreateCostumer) {
     const createCostumer = await this.dataService.costumer.create({
-      include: {
-        address: true,
-      },
       data: {
         name: costumer.name,
         contact: costumer.contact,
         email: costumer.email,
+        street: costumer.street,
+        neighborhood: costumer.neighborhood,
+        number: costumer.number,
         user_uuid: costumer.user_uuid,
-        address: {
-          create: {
-            avenue: costumer.address.avenue,
-            neighborhood: costumer.address.neighborhood,
-            number: costumer.address.number,
-            costumer_id: costumer.address.costumer_id,
-          },
-        },
-        address_id: costumer.address_id,
       },
     });
-
     return createCostumer;
   }
-
   async getCostumer() {
     return await this.dataService.costumer.findMany({
       orderBy: {
@@ -47,9 +36,6 @@ export class CostumerService {
       },
       orderBy: {
         created_at: 'asc',
-      },
-      include: {
-        address: true,
       },
     });
   }
@@ -73,7 +59,9 @@ export class CostumerService {
         name: true,
         contact: true,
         email: true,
-        address: true,
+        street: true,
+        neighborhood: true,
+        number: true,
       },
     });
   }
@@ -87,13 +75,17 @@ export class CostumerService {
         name: costumer.name,
         contact: costumer.contact,
         email: costumer.email,
-        // address: costumer.address,
-        user_uuid: costumer.user_uuid,
+        street: costumer.street,
+        neighborhood: costumer.neighborhood,
+        number: costumer.number,
       },
       select: {
         name: true,
         contact: true,
         email: true,
+        street: true,
+        neighborhood: true,
+        number: true,
         user_uuid: true,
       },
     });
