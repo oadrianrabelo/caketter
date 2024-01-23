@@ -12,6 +12,10 @@ interface CostumerProps {
 interface Costumer {
   name: string;
   contact: string;
+  email: string;
+  avenueAndNumber: string;
+  neighborhood: string;
+  address: string;
   user_uuid: string;
 }
 
@@ -27,6 +31,8 @@ export function UpdateCostumer({ id }: CostumerProps) {
         await api.put(`costumer/${id}`, {
           name: data.name,
           contact: data.contact,
+          email: data.email,
+          address: `${data.avenueAndNumber}, ${data.neighborhood}`,
           user_uuid: userUuid,
         });
         Notification.fire({
@@ -49,6 +55,9 @@ export function UpdateCostumer({ id }: CostumerProps) {
     api.get<Costumer>(`costumer/${id}`).then((res) => {
       setValue("name", res.data.name);
       setValue("contact", res.data.contact);
+      setValue("email", res.data.email);
+      setValue("avenueAndNumber", res.data.address);
+      setValue("neighborhood", res.data.neighborhood);
     });
   };
 
@@ -76,6 +85,36 @@ export function UpdateCostumer({ id }: CostumerProps) {
                     </label>
                     <input
                       {...register("contact")}
+                      type="text"
+                      className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    />
+                  </div>                  
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900">
+                      Email
+                    </label>
+                    <input
+                      {...register("email")}
+                      type="text"
+                      className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    />
+                  </div>                  
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900">
+                      Avenida e número
+                    </label>
+                    <input
+                      {...register("avenueAndNumber")}
+                      type="text"
+                      className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900">
+                      Bairro
+                    </label>
+                    <input
+                      {...register("neighborhood")}
                       type="text"
                       className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     />

@@ -9,12 +9,26 @@ export class CostumerService {
 
   async createCostumer(costumer: CreateCostumer) {
     const createCostumer = await this.dataService.costumer.create({
+      include: {
+        address: true,
+      },
       data: {
         name: costumer.name,
         contact: costumer.contact,
+        email: costumer.email,
         user_uuid: costumer.user_uuid,
+        address: {
+          create: {
+            avenue: costumer.address.avenue,
+            neighborhood: costumer.address.neighborhood,
+            number: costumer.address.number,
+            costumer_id: costumer.address.costumer_id,
+          },
+        },
+        address_id: costumer.address_id,
       },
     });
+
     return createCostumer;
   }
 
@@ -33,6 +47,9 @@ export class CostumerService {
       },
       orderBy: {
         created_at: 'asc',
+      },
+      include: {
+        address: true,
       },
     });
   }
@@ -55,6 +72,8 @@ export class CostumerService {
       select: {
         name: true,
         contact: true,
+        email: true,
+        address: true,
       },
     });
   }
@@ -67,11 +86,14 @@ export class CostumerService {
       data: {
         name: costumer.name,
         contact: costumer.contact,
+        email: costumer.email,
+        // address: costumer.address,
         user_uuid: costumer.user_uuid,
       },
       select: {
         name: true,
         contact: true,
+        email: true,
         user_uuid: true,
       },
     });

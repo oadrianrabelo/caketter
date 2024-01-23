@@ -9,6 +9,14 @@ export class UpdateCostumer {
   @IsOptional()
   contact: string;
 
+  @IsString()
+  @IsOptional()
+  email: string;
+
+  @IsString()
+  @IsOptional()
+  address: string;
+
   @IsUUID()
   @IsOptional()
   user_uuid: string;

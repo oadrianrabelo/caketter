@@ -15,6 +15,12 @@ interface Costumer {
   id: number;
   name: string;
   contact: string;
+  email: string;
+  address: {
+    avenue: string;
+    number: string;
+    neighborhood: string;
+  };
   created_at: Date;
   updated_at: Date;
   id_user: number;
@@ -114,7 +120,7 @@ export default function Costumers() {
       </form>
       <NewButton route="/costumer/create" title="Novo Cliente" />
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left text-gray-500">
+        <table className="w-full text-center text-sm text-left text-gray-500">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <th scope="col" className="py-3 px-6">
@@ -125,6 +131,12 @@ export default function Costumers() {
               </th>
               <th scope="col" className="py-3 px-6">
                 Contato
+              </th>
+              <th scope="col" className="py-3 px-6">
+                E-mail
+              </th>
+              <th scope="col" className="py-3 px-6">
+                Endereço
               </th>
               <th scope="col" className="py-3 px-6">
                 Data de criação
@@ -139,11 +151,16 @@ export default function Costumers() {
           <tbody>
             {currentElements.map((costumer, index) => {
               const currentIndex = firstIndex + index + 1;
+              if (costumer.address_id !== null) {
+                console.log(costumer.address[0].avenue)
+              }
               return (
                 <tr key={costumer.id} className="bg-white border-b">
                   <td className="py-4 px-6">{currentIndex}</td>
                   <td className="py-4 px-6">{costumer.name}</td>
                   <td className="py-4 px-6">{costumer.contact}</td>
+                  <td className="py-4 px-6">{costumer.email ?? "--"}</td>
+                  <td className="py-4 px-6">{costumer.address.avenue}</td>
                   <td className="py-4 px-6">
                     {formatDate(costumer.created_at)}
                   </td>

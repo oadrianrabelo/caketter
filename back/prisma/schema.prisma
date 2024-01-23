@@ -34,15 +34,32 @@ model Costumer {
   name       String
   contact    String
   email      String?
-  address    String?
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
 
-  Order   Order[]
-  user    User    @relation(fields: [user_uuid], references: [uuid])
+  Order     Order[]
+  user      User    @relation(fields: [user_uuid], references: [uuid])
   user_uuid String
 
+  address    Address? @relation(fields: [address_id], references: [id])
+  address_id Int?
+
   @@map("costumer")
+}
+
+model Address {
+  id           Int    @id @default(autoincrement())
+  avenue       String
+  number       String
+  neighborhood String
+
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
+
+  costumer    Costumer[]
+  costumer_id Int
+
+  @@map("address")
 }
 
 model Cake {
@@ -57,7 +74,7 @@ model Cake {
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
 
-  user    User    @relation(fields: [user_uuid], references: [uuid])
+  user      User   @relation(fields: [user_uuid], references: [uuid])
   user_uuid String
 
   @@map("cake")
@@ -74,7 +91,7 @@ model Order {
   created_at    DateTime  @default(now())
   updated_at    DateTime? @updatedAt
 
-  user    User    @relation(fields: [user_uuid], references: [uuid])
+  user      User   @relation(fields: [user_uuid], references: [uuid])
   user_uuid String
 
   @@map("order")
