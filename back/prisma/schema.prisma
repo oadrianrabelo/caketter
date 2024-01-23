@@ -37,29 +37,15 @@ model Costumer {
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
 
+  street       String?
+  number       String?
+  neighborhood String?
+
   Order     Order[]
   user      User    @relation(fields: [user_uuid], references: [uuid])
   user_uuid String
 
-  address    Address? @relation(fields: [address_id], references: [id])
-  address_id Int?
-
   @@map("costumer")
-}
-
-model Address {
-  id           Int    @id @default(autoincrement())
-  avenue       String
-  number       String
-  neighborhood String
-
-  created_at DateTime  @default(now())
-  updated_at DateTime? @updatedAt
-
-  costumer    Costumer[]
-  costumer_id Int
-
-  @@map("address")
 }
 
 model Cake {
