@@ -10,17 +10,17 @@ interface Costumer {
   name: string;
   contact: string;
   email: string;
-  address: string;
+  street: string;
+  neighborhood: string;
+  number: string;
 }
 interface IFormCostumer {
   name: string;
   contact: string;
   email: string;
-  address: {
-    avenue: string;
-    number: string;
-    neighborhood: string;
-  };
+  street: string;
+  neighborhood: string;
+  number: string;
   address_id: number;
   user_uuid: string;
 }
@@ -38,18 +38,14 @@ export function CreateCostumer() {
     contact: yup.string().required(),
   });
   const onSubmit = (data: IFormCostumer) => {
-    console.log('Enviando dados do cliente:', data);
     api
       .post(`costumer`, {
         name: data.name,
         contact: data.contact,
         email: data.email,
-        address: {
-          avenue: data.address.avenue,
-          number: data.address.number,
-          neighborhood: data.address.neighborhood,
-        },
-        address_id: data.address_id,
+        street: data.street,
+        neighborhood: data.neighborhood,
+        number: data.number,
         user_uuid: userUuid,
       })
       .then(() => {
@@ -128,7 +124,7 @@ export function CreateCostumer() {
                   Avenida
                 </label>
                 <input
-                  {...register("address.avenue")}
+                  {...register("street")}
                   type="text"
                   placeholder="Avenida"
                   className="relative block w-full appearance-none rounded-r-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -139,7 +135,7 @@ export function CreateCostumer() {
                   Número
                 </label>
                 <input
-                  {...register("address.number")}
+                  {...register("number")}
                   type="text"
                   placeholder="Número"
                   className="relative block w-full appearance-none rounded-l-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -151,7 +147,7 @@ export function CreateCostumer() {
                 Bairro
               </label>
               <input
-                {...register("address.neighborhood")}
+                {...register("neighborhood")}
                 type="text"
                 placeholder="Bairro"
                 className="relative block w-full appearance-none rounded-b border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus: outline-none focus:ring-indigo-500 sm:text-sm"

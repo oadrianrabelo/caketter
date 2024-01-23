@@ -152,7 +152,7 @@ export default function Costumers() {
             {currentElements.map((costumer, index) => {
               const currentIndex = firstIndex + index + 1;
               if (costumer.address_id !== null) {
-                console.log(costumer.address[0].avenue)
+                console.log(costumer)
               }
               return (
                 <tr key={costumer.id} className="bg-white border-b">
@@ -160,7 +160,7 @@ export default function Costumers() {
                   <td className="py-4 px-6">{costumer.name}</td>
                   <td className="py-4 px-6">{costumer.contact}</td>
                   <td className="py-4 px-6">{costumer.email ?? "--"}</td>
-                  <td className="py-4 px-6">{costumer.address.avenue}</td>
+                  <td className="py-4 px-6">{`Av. ${costumer.street}, ${costumer.number}, Bairro ${costumer.neighborhood}` ?? "--"}</td>
                   <td className="py-4 px-6">
                     {formatDate(costumer.created_at)}
                   </td>
