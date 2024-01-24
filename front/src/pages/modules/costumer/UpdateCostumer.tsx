@@ -4,6 +4,7 @@ import { Modal } from "../../../components/Modal";
 import { Notification } from "../../../utils/Notification";
 import { ConfirmButton } from "../../../components/ConfirmButton";
 import { useAuth } from "../../../context/AuthContext";
+import InputMask from "react-input-mask";
 
 interface CostumerProps {
   id: number;
@@ -85,11 +86,14 @@ export function UpdateCostumer({ id }: CostumerProps) {
                     <label className="block mb-2 text-sm font-medium text-gray-900">
                       Contato
                     </label>
-                    <input
+                    <InputMask
+                      mask="(99) 99999-9999"
+                      required
                       {...register("contact")}
                       type="text"
-                      className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    />
+                      placeholder="(  ) _____-____"
+                      className="g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    ></InputMask>
                   </div>
                   <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900">
@@ -118,7 +122,7 @@ export function UpdateCostumer({ id }: CostumerProps) {
                       </label>
                       <input
                         {...register("number")}
-                        type="text"
+                        type="number"
                         className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                       />
                     </div>
