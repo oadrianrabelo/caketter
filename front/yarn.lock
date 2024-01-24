@@ -495,6 +495,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-input-mask@^3.0.5":
+  version "3.0.5"
+  resolved "https://registry.npmjs.org/@types/react-input-mask/-/react-input-mask-3.0.5.tgz"
+  integrity sha512-vQ1x6ykwjDrDrJZq1zw5/uQ+nqGHUV6bWscsVZJ/qsNwNXWxZm7KRBHLJ5k6TQt3MHjhpoYHzPH6FwjVSZODHA==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-transition-group@^4.4.0":
   version "4.4.5"
   resolved "https://registry.npmjs.org/@types/react-transition-group/-/react-transition-group-4.4.5.tgz"
@@ -1102,6 +1109,13 @@ inherits@^2.0.3, inherits@2:
   resolved "https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
+invariant@^2.2.4:
+  version "2.2.4"
+  resolved "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz"
+  integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
+  dependencies:
+    loose-envify "^1.0.0"
+
 is-arrayish@^0.2.1:
   version "0.2.1"
   resolved "https://registry.npmjs.org/is-arrayish/-/is-arrayish-0.2.1.tgz"
@@ -1246,7 +1260,7 @@ lodash.once@^4.0.0:
   resolved "https://registry.npmjs.org/lodash.once/-/lodash.once-4.1.1.tgz"
   integrity sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==
 
-loose-envify@^1.1.0, loose-envify@^1.4.0:
+loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.npmjs.org/loose-envify/-/loose-envify-1.4.0.tgz"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -1569,7 +1583,7 @@ react-currency-input-field@^3.6.11:
   resolved "https://registry.npmjs.org/react-currency-input-field/-/react-currency-input-field-3.6.11.tgz"
   integrity sha512-M9vOx1eaioSaYWirm7W2WSBi4bpLg+LK4Gf7C1kNhy6MvoSoOzd0mYZPxA78OC9UBIQ2nM080Wu9D1CwTY6n3w==
 
-"react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", react-dom@^18.2.0, react-dom@>=16.6.0, react-dom@>=16.8:
+"react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", react-dom@^18.2.0, react-dom@>=0.14.0, react-dom@>=16.6.0, react-dom@>=16.8:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
@@ -1581,6 +1595,14 @@ react-hook-form@^7.36.0:
   version "7.36.0"
   resolved "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.36.0.tgz"
   integrity sha512-2PmRhTDH90/G1XWbUGpfuFBf7wxj9kYvzPqoZCv4wUGBIfuac0fK3up9sbeoz0ghpLYcFFXRVDKMUXgMutLXTw==
+
+react-input-mask@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.npmjs.org/react-input-mask/-/react-input-mask-2.0.4.tgz"
+  integrity sha512-1hwzMr/aO9tXfiroiVCx5EtKohKwLk/NT8QlJXHQ4N+yJJFyUuMT+zfTpLBwX/lK3PkuMlievIffncpMZ3HGRQ==
+  dependencies:
+    invariant "^2.2.4"
+    warning "^4.0.2"
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
@@ -1632,7 +1654,7 @@ react-transition-group@^4.3.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-"react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18.0.0", react@^18.2.0, "react@>= 16", react@>=16.6.0, react@>=16.8, react@>=16.8.0:
+"react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18.0.0", react@^18.2.0, "react@>= 16", react@>=0.14.0, react@>=16.6.0, react@>=16.8, react@>=16.8.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
@@ -1941,6 +1963,13 @@ vite@^3.0.0, vite@^3.1.0:
     rollup "~2.78.0"
   optionalDependencies:
     fsevents "~2.3.2"
+
+warning@^4.0.2:
+  version "4.0.3"
+  resolved "https://registry.npmjs.org/warning/-/warning-4.0.3.tgz"
+  integrity sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==
+  dependencies:
+    loose-envify "^1.0.0"
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
