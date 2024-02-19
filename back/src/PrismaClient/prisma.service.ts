@@ -8,7 +8,7 @@ export class DataService
   implements OnModuleInit, OnModuleDestroy
 {
   constructor() {
-    super({ log: ['query'] });
+    super({ log: ['info'] });
   }
 
   async onModuleInit() {

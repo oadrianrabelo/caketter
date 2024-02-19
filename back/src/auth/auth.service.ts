@@ -2,7 +2,7 @@ import {
   ForbiddenException,
   Injectable,
   InternalServerErrorException,
-  NotFoundException,
+  Logger,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
@@ -19,9 +19,13 @@ export class AuthService {
     private config: ConfigService,
   ) {}
 
+  private readonly logger = new Logger(AuthService.name);
+
   async signUp(dto: AuthDto) {
+    this.logger.log('Criando usuário...');
     try {
       if (dto.password.length < 8) {
+        this.logger.error('Falha ao criar usuário');
         throw new ForbiddenException(
           'A senha deve conter pelo menos 8 caracteres',
         );
@@ -59,6 +63,13 @@ export class AuthService {
           password,
         },
       });
+
+      this.logger.log(
+        `Usuário ${user.name} criado com sucesso às ${user.created_at}`,
+      );
+      this.logger.verbose(
+        `Usuário ${user.name} criado com sucesso às ${user.created_at}`,
+      );
       return this.signToken(user.uuid, user.email);
     } catch (error) {
       if (error instanceof ForbiddenException) {
@@ -90,6 +101,7 @@ export class AuthService {
         password: true,
       },
     });
+    this.logger.log(`Fazendo login para usuário ${user.name}`);
 
     if (!user) throw new ForbiddenException('Email inválido');
 

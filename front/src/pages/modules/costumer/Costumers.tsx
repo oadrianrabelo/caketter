@@ -151,9 +151,6 @@ export default function Costumers() {
           <tbody>
             {currentElements.map((costumer, index) => {
               const currentIndex = firstIndex + index + 1;
-              if (costumer.address_id !== null) {
-                console.log(costumer)
-              }
               return (
                 <tr key={costumer.id} className="bg-white border-b">
                   <td className="py-4 px-6">{currentIndex}</td>

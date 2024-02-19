@@ -5,6 +5,7 @@ import { Notification } from "../../../utils/Notification";
 import { ConfirmButton } from "../../../components/ConfirmButton";
 import { useAuth } from "../../../context/AuthContext";
 import InputMask from "react-input-mask";
+import { useEffect, useState } from "react";
 
 interface CostumerProps {
   id: number;
@@ -24,6 +25,7 @@ export function UpdateCostumer({ id }: CostumerProps) {
   const { user } = useAuth();
   const userUuid = user?.uuid;
   const { register, handleSubmit, setValue } = useForm<Costumer>();
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   const onSubmit = (fn: () => void) => {
     const submit: SubmitHandler<Costumer> = async (data) => {
@@ -61,11 +63,18 @@ export function UpdateCostumer({ id }: CostumerProps) {
       setValue("street", res.data.street);
       setValue("neighborhood", res.data.neighborhood);
       setValue("number", res.data.number);
+      setIsDataLoaded(true);
     });
   };
 
+  useEffect(() => {
+    if (!isDataLoaded) {
+      loadData();
+    }
+  }, [isDataLoaded]);
+
   return (
-    <Modal onOpen={loadData}>
+    <Modal onOpen={() => setIsDataLoaded(false)}>
       {({ handleCloseModal }) => {
         return (
           <>
@@ -88,11 +97,10 @@ export function UpdateCostumer({ id }: CostumerProps) {
                     </label>
                     <InputMask
                       mask="(99) 99999-9999"
-                      required
                       {...register("contact")}
                       type="text"
                       placeholder="(  ) _____-____"
-                      className="g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     ></InputMask>
                   </div>
                   <div>
