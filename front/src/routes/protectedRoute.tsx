@@ -8,12 +8,16 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const storagedToken = localStorage.getItem("@App:token");
+
   useEffect(() => {
+    if (storagedToken && (location.pathname === '/' || location.pathname === '/signup')) {
+      navigate("/home")
+    }
     if (!storagedToken && location.pathname !== '/signup') {
       navigate("/")
     } else if (!storagedToken) {
       navigate('/signup')
     }
-  }, [storagedToken]);
+  }, [storagedToken, location.pathname, navigate]);
   return children;
 };

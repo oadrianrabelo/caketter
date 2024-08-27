@@ -23,8 +23,8 @@ export class OrderController {
     return this.orderService.getOrdersByUserUuid(userUuid);
   }
   @Get('/orders/search')
-  getOrdersSearch(@Query('q') q: string) {
-    return this.orderService.getOrderSearch(q);
+  getOrdersSearch(@Query('q') q: string, @Query('userUuid') userUuid: string) {
+    return this.orderService.getOrderSearch(q, userUuid);
   }
 
   @Get('/order/:id')

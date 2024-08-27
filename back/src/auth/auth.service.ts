@@ -101,13 +101,17 @@ export class AuthService {
         password: true,
       },
     });
-    this.logger.log(`Fazendo login para usuário ${user.name}`);
 
     if (!user) throw new ForbiddenException('Email inválido');
 
+    this.logger.log(`Fazendo login para usuário ${user.name}`);
+
     const passwordMatch = await argon.verify(user.password, dto.password);
 
-    if (!passwordMatch) throw new ForbiddenException('Senha inválida');
+    if (!passwordMatch) {
+      this.logger.error(`Senha inválida para usuário ${user.uuid}`);
+      throw new ForbiddenException('Senha inválida');
+    }
 
     const { access_token } = await this.signToken(user.uuid, user.email);
     return {

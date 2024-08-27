@@ -29,23 +29,25 @@ const headerNavLinks = [
 ];
 
 const LayoutWrapper = ({ children }: Props) => {
-  const { logout, signed } = useAuth();
+  const { logout, signed, user } = useAuth();
   function handleLogout() {
     logout();
   }
   return (
-    
     <>
       <SectionContainer>
-        <div className="flex h-screen w-auto flex-col justify-between ">
+        <div className="flex h-screen flex-col ">
           {signed && (
             <header className="flex items-center justify-between py-2">
-              <div>
+              <div className="flex items-center">
                 <Link href="/" aria-label="">
-                  <div className="flex items-center justify-between">
-                    <div className="mr-3"></div>
-                  </div>
+                  <div className="flex items-center justify-between mr-3"></div>
                 </Link>
+                <div className="hidden sm:block">
+                  <span className="font-medium text-xl text-gray-900 sm:p-4 ">
+                    {user && `Bem-vindo, ${user.name}`}
+                  </span>
+                </div>
               </div>
               <div className="flex item-center text-base leading-5">
                 <div className="hidden sm:block">
@@ -53,7 +55,11 @@ const LayoutWrapper = ({ children }: Props) => {
                     <Link
                       key={link.title}
                       href={link.href}
-                      className="p-1 font-medium text-gray-900 sm:p-4"
+                      className="p-1 text-lg font-medium underline text-gray-900 sm:p-4"
+                      style={{
+                        textUnderlineOffset: "5px",
+                        textDecorationThickness: "0.10em"
+                      }}
                     >
                       {link.title}
                     </Link>

@@ -88,7 +88,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
         icon: "success",
         title: `Bem Vindo!`,
       });
-      navigate("/orders");
+      navigate("/home");
       setLoading(false);
     } catch (err: any) {
       if (err.response && err.response.data) {

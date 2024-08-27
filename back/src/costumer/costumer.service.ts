@@ -13,6 +13,32 @@ export class CostumerService {
     this.logger.log(`Criando cliente...`);
 
     try {
+      const existingCostumer = await this.dataService.costumer.findFirst({
+        where: {
+          email: costumer.email,
+          user_uuid: costumer.user_uuid,
+        },
+      });
+
+      const existingContact = await this.dataService.costumer.findFirst({
+        where: {
+          contact: costumer.contact,
+          user_uuid: costumer.user_uuid,
+        },
+      });
+
+      if (existingCostumer) {
+        throw new ForbiddenException(
+          'Já existe um cliente com este email cadastrado.',
+        );
+      }
+
+      if (existingContact) {
+        throw new ForbiddenException(
+          'Já existe um cliente com este contato cadastrado.',
+        );
+      }
+
       const createCostumer = await this.dataService.costumer.create({
         data: {
           name: costumer.name,
@@ -55,13 +81,19 @@ export class CostumerService {
     });
   }
 
-  async getCostumerByLike(termo: string) {
+  async getCostumerByLike(termo: string, userUuid: string) {
     return this.dataService.costumer.findMany({
       where: {
         name: {
           contains: termo,
+          mode: 'insensitive',
+        },
+        user_uuid: {
+          contains: userUuid,
+          mode: 'insensitive',
         },
       },
+      orderBy: { created_at: 'asc' },
     });
   }
 

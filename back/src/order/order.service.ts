@@ -43,7 +43,7 @@ export class OrderService {
     });
   }
 
-  async getOrderSearch(q: any) {
+  async getOrderSearch(q: any, userUuid: string) {
     return this.dataService.order.findMany({
       select: {
         costumer: true,
@@ -57,6 +57,11 @@ export class OrderService {
         costumer: {
           name: {
             contains: q,
+            mode: 'insensitive',
+          },
+          user_uuid: {
+            contains: userUuid,
+            mode: 'insensitive',
           },
         },
       },

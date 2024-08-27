@@ -4,6 +4,7 @@ import { api } from "../services/API";
 import { useState } from "react";
 import { Notification } from "../utils/Notification";
 import { useNavigate } from "react-router-dom";
+import CaketterLogo from "../assets/1x/SVG/logo.svg";
 interface User {
   name: string;
   login: string;
@@ -85,9 +86,9 @@ export default function SignUpUser() {
       <div className="w-full max-w-md space-y-8">
         <div>
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Tux_Paint_birthday_cake.svg/2048px-Tux_Paint_birthday_cake.svg.png"
+            src={CaketterLogo}
             alt="Caketter"
-            className="mx-auto h-12 w-auto"
+            className="mx-auto w-32"
           />
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             Crie uma nova conta

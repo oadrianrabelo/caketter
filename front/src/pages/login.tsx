@@ -1,6 +1,7 @@
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useAuth } from "../context/AuthContext";
 import { FormEvent, useState } from "react";
+import CaketterLogo from "../assets/1x/SVG/logo.svg";
 
 export function Login() {
   const { login } = useAuth();
@@ -22,9 +23,9 @@ export function Login() {
       <div className="w-full max-w-md space-y-8">
         <div>
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Tux_Paint_birthday_cake.svg/2048px-Tux_Paint_birthday_cake.svg.png"
+            src={CaketterLogo}
             alt="Caketter"
-            className="mx-auto h-12 w-auto"
+            className="mx-auto w-32"
           />
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             Faça login em sua conta
@@ -69,7 +70,7 @@ export function Login() {
               />
             </div>
           </div>
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
                 name="remember-me"
@@ -91,7 +92,7 @@ export function Login() {
                 Esqueci minha senha
               </a>
             </div>
-          </div>
+          </div> */}
           <div>
             <button
               type="submit"

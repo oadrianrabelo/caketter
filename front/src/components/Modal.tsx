@@ -28,7 +28,7 @@ export const Modal: React.FC<ModalProps> = ({ children, onOpen }) => {
     <>
       <button
         title="Editar"
-        className="text-white bg-[#ffb6c1] hover:bg-[#d0959e] focus:outline-none focus:ring-4 focus:ring-[#C0FDFB] font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 transition duration-300"
+        className="text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-800 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 transition duration-300"
         onClick={handleOpenModal}
       >
         <PencilSquareIcon className="h-6 w-6 text-white" />

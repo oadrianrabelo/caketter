@@ -30,11 +30,16 @@ export class CakeService {
     });
   }
 
-  async getCakeSearch(q: any) {
+  async getCakeSearch(q: any, userUuid: string) {
     return this.dataService.cake.findMany({
       where: {
         name_top: {
           contains: q,
+          mode: 'insensitive',
+        },
+        user_uuid: {
+          contains: userUuid,
+          mode: 'insensitive',
         },
       },
     });

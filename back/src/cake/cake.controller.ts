@@ -30,8 +30,8 @@ export class CakeController {
   }
 
   @Get('/cakes/search')
-  getCakeSearch(@Query('q') q: string) {
-    return this.cakeService.getCakeSearch(q);
+  getCakeSearch(@Query('q') q: string, @Query('userUuid') userUuid: string) {
+    return this.cakeService.getCakeSearch(q, userUuid);
   }
 
   @Put('cake/edit/:id')

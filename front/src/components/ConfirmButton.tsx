@@ -8,7 +8,7 @@ export const ConfirmButton = ({ text, crud = false }: ConfirmButtonProps) => {
       <>
         <button
           type="submit"
-          className="gruop relative flex w-full justify-center rounded-md border border-transparent bg-[#64B6AC] py-2 px-4 text-lg font-medium text-white hover:bg-[#345E59] focus:outline-none focus:ring-2 focus:ring-[#C0FDFB] focus:ring-offset-2 transition duration-300"
+          className="gruop relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-lg font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-800 focus:ring-offset-2 transition duration-300"
         >
           {text}
         </button>

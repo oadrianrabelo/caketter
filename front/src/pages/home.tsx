@@ -1,23 +1,36 @@
+import { useAuth } from "../context/AuthContext";
 import Card from "../utils/Card";
+import CaketterLogo from "../assets/1x/SVG/logo-without-text.svg";
 
 export default function Home() {
+  const { signed } = useAuth();
   return (
     <>
       <div className="bg-[#EFEFEF] border-solid border-2 border-gray-500 rounded-lg">
         <div className="container mx-auto p-8">
           <section className="mb-16 text-center">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">
-              Bem vindo ao{" "}
-              <span className="text-[#345E59] ">Caketter</span>!
+              Bem vindo ao <span className="text-[#593F91] ">Caketter</span>!
             </h1>
-            <p className="text-lg text-gray-600">
+            <img
+              src={CaketterLogo}
+              alt="Descrição da imagem"
+              className="mx-auto mt-8"
+              style={{ width: "24%", height: "auto" }} 
+            />
+            <p className="text-lg font-medium pt-10">
               Transforme sua confeitaria com nossa plataforma fácil de usar.
             </p>
-            <p className="mt-4">
-              <a href="/signup" className="text-2xl font-bold text-blue-600 hover:underline">
-              Crie uma conta agora!
-              </a>
-            </p>
+            {!signed && (
+              <p className="mt-4">
+                <a
+                  href="/signup"
+                  className="text-2xl font-bold text-blue-600 hover:underline"
+                >
+                  Crie uma conta agora!
+                </a>
+              </p>
+            )}
           </section>
 
           <ul className="grid grid-cols-2 md:grid-cols-2 gap-8 justify-center">
@@ -50,15 +63,14 @@ export default function Home() {
               Nossa equipe de suporte está pronta para ajudar!
             </p>
             <a
-              href="/contact"
-              className="bg-[#64B6AC] text-white hover:bg-[#345E59] focus:ring-4 focus:ring-[#C0FDFB] text-white font-medium py-2 px-4 rounded-full transition duration-300"
+              href="/home"
+              className="bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-800 text-white font-medium py-2 px-4 rounded-full transition duration-300"
             >
               Contate o Suporte
             </a>
           </section>
         </div>
       </div>
-
     </>
   );
 }

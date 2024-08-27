@@ -11,6 +11,8 @@ import { DeleteButton } from "../../../components/DeleteButton";
 import { useAuth } from "../../../context/AuthContext";
 import { usePagination } from "../../../components/Pagination";
 import PaginationButtons from "../../../components/PaginationButtons";
+import { CalendarIcon } from "@heroicons/react/20/solid";
+import { Tooltip } from "react-tooltip";
 
 interface Costumer {
   id: number;
@@ -46,6 +48,7 @@ export function Orders() {
   const [value, setValue] = useState(0);
   const [search, setSearch] = useState("");
   const { user } = useAuth();
+  const daysTreshold = 3;
 
   const {
     currentPage,
@@ -66,6 +69,15 @@ export function Orders() {
   });
 
   const navigate = useNavigate();
+
+  const daysDifference = (date1: Date, date2: Date) => {
+    const oneDay = 24 * 60 * 60 * 1000;
+    const diffDays = Math.round(
+      Math.abs((date1.getTime() - date2.getTime()) / oneDay)
+    );
+
+    return diffDays;
+  };
 
   const searchOrder = (): void => {
     api.get(`orders/search?q=${search}`).then((res: any) => {
@@ -165,12 +177,12 @@ export function Orders() {
               <th scope="col" className="py-1 px-1">
                 Preço
               </th>
-              <th scope="col" className="py-3 px-6">
+              {/* <th scope="col" className="py-3 px-6">
                 Data de criação
               </th>
               <th scope="col" className="py-3 px-6">
                 Última alteração
-              </th>
+              </th> */}
               <th scope="col" className="py-3 px-6">
                 Data de entrega
               </th>
@@ -179,87 +191,111 @@ export function Orders() {
             </tr>
           </thead>
           <tbody>
-            {currentElements.map((order, index) => {
-              const currentIndex = firstIndex + index + 1;
-              return (
-                <tr
-                  key={order.id}
-                  className="bg-white border-b"
+            {orders.length === 0 ? (
+              <tr>
+                <td
+                  colSpan={9}
+                  className="py-4 px-6 text-center font-normal text-xl bg-gray-100 text-gray-600"
                 >
-                  <td className="py-4 px-6">{currentIndex}</td>
-                  <td className="py-2 px-3">
-                    <table className="w-full text-sm text-gray-500">
-                      <thead>
-                        <tr>
-                          <th scope="col" className="py-2 px-1">
-                            Massa
-                          </th>
-                          <th scope="col" className="py-2 px-1">
-                            Recheio
-                          </th>
-                          <th scope="col" className="py-2 px-1">
-                            Tamanho
-                          </th>
-                          <th scope="col" className="py-2 px-1">
-                            Nome no topo
-                          </th>
-                          <th scope="col" className="py-2 px-1">
-                            Idade
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody className="text-center">
-                        <tr>
-                          <td className="py-4 px-1">{order.cake.dough}</td>
-                          <td className="py-4 px-1">{order.cake.filling}</td>
-                          <td className="py-4 px-1">{order.cake.size}</td>
-                          <td className="py-4 px-1">{order.cake.name_top}</td>
-                          <td className="py-4 px-1">{order.cake.age_top}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                  <td className="py-2 px-3">
-                    <table className="w-full text-sm text-gray-500">
-                      <thead>
-                        <tr>
-                          <th scope="col" className="py-2 px-1">
-                            Nome
-                          </th>
-                          <th scope="col" className="py-2 px-1">
-                            Contato
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody className="text-center">
-                        <tr>
-                          <td className="py-4 px-1">{order.costumer.name}</td>
-                          <td className="py-4 px-1">
-                            {order.costumer.contact}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                  <td className="py-1 px-2 text-center">R$ {order.price}</td>
-                  <td className="py-1 px-1 text-center">
-                    {formatDate(order.created_at)}
-                  </td>
-                  <td className="py-1 px-1 text-center">
-                    {formatDate(order.updated_at)}
-                  </td>
-                  <td className="py-1 px-1 text-center">
-                    {formatDate(order.delivery_date)}
-                  </td>
-                  <td className="py-1 px-1">
-                    <UpdateOrder id={order.id} />
-                  </td>
-                  <td className="py-1 px-1">
-                    <DeleteButton onClick={() => deleteOrder(order.id)} />
-                  </td>
-                </tr>
-              );
-            })}
+                  Nenhum pedido cadastrado
+                </td>
+              </tr>
+            ) : (
+              currentElements.map((order, index) => {
+                const currentIndex = firstIndex + index + 1;
+                const diffDays = daysDifference(
+                  new Date(order.delivery_date),
+                  new Date()
+                );
+                const isDeliveryClose = diffDays <= daysTreshold;
+                return (
+                  <tr key={order.id} className="bg-white border-b">
+                    <td className="py-4 px-6">{currentIndex}</td>
+                    <td className="py-2 px-3">
+                      <table className="w-full text-sm text-gray-500">
+                        <thead>
+                          <tr>
+                            <th scope="col" className="py-2 px-1">
+                              Massa
+                            </th>
+                            <th scope="col" className="py-2 px-1">
+                              Recheio
+                            </th>
+                            <th scope="col" className="py-2 px-1">
+                              Tamanho
+                            </th>
+                            <th scope="col" className="py-2 px-1">
+                              Nome no topo
+                            </th>
+                            <th scope="col" className="py-2 px-1">
+                              Idade
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody className="text-center">
+                          <tr>
+                            <td className="py-4 px-1">{order.cake.dough}</td>
+                            <td className="py-4 px-1">{order.cake.filling}</td>
+                            <td className="py-4 px-1">{order.cake.size}</td>
+                            <td className="py-4 px-1">{order.cake.name_top}</td>
+                            <td className="py-4 px-1">{order.cake.age_top}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                    <td className="py-2 px-3">
+                      <table className="w-full text-sm text-gray-500">
+                        <thead>
+                          <tr>
+                            <th scope="col" className="py-2 px-1">
+                              Nome
+                            </th>
+                            <th scope="col" className="py-2 px-1">
+                              Contato
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody className="text-center">
+                          <tr>
+                            <td className="py-4 px-1">{order.costumer.name}</td>
+                            <td className="py-4 px-1">
+                              {order.costumer.contact}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                    <td className="py-1 px-2 text-center">R$ {order.price}</td>
+                    {/* <td className="py-1 px-1 text-center">
+                      {formatDate(order.created_at)}
+                    </td>
+                    <td className="py-1 px-1 text-center">
+                      {formatDate(order.updated_at)}
+                    </td> */}
+                    <td className="py-1 px-1 text-center relative">
+                      <Tooltip id="threshold-advise"/>
+                      <div
+                        className="flex items-center justify-center"
+                        data-tooltip-id="threshold-advise"
+                        data-tooltip-content={`Falta${diffDays === 1 ? '' : 'm'} ${diffDays} dia${diffDays === 1 ? '' : 's'} para entregar este pedido`}
+                        data-tooltip-offset={40}
+                      >
+                        {isDeliveryClose && (
+                          <CalendarIcon className="h-5 w-5 text-red-500 absolute top-4 left-0 right-0 m-auto" />
+                        )}
+                      </div>
+                      {formatDate(order.delivery_date)}
+                    </td>
+                    <td className="py-1 px-1">
+                      <UpdateOrder id={order.id} />
+                    </td>
+                    <td className="py-1 px-1">
+                      <DeleteButton onClick={() => deleteOrder(order.id)} />
+                    </td>
+                  </tr>
+                );
+              })
+            )}
           </tbody>
         </table>
       </div>
@@ -270,7 +306,7 @@ export function Orders() {
         isNextDisabled={isNextDisabled}
         elementsPerPage={elementsPerPage}
         onElementsPerPageChange={setElementsPerPage}
-       />
+      />
     </>
   );
 }

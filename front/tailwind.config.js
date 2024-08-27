@@ -6,7 +6,9 @@ module.exports = {
     'node_modules/flowbite/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      scale: ['hover', 'transform', 'group-hover']
+    },
   },
   plugins: [
     require('flowbite/plugin')

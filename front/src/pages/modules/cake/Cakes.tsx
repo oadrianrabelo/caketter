@@ -98,20 +98,20 @@ export function Cakes() {
           searchCake();
         }}
       >
-      <HeaderOne title="Bolos" />
+        <HeaderOne title="Bolos" />
 
-      <div className="mb-6">
-        <input
-          type="text"
-          id="search"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          placeholder="Pesquisar"
-        />
-      </div>
+        <div className="mb-6">
+          <input
+            type="text"
+            id="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="Pesquisar"
+          />
+        </div>
       </form>
-      <NewButton route="/cake/create" title="Novo Bolo"/>
+      <NewButton route="/cake/create" title="Novo Bolo" />
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50">
@@ -145,13 +145,18 @@ export function Cakes() {
             </tr>
           </thead>
           <tbody>
-            {currentElements.map((cake, index) => {
+            {
+            cakes.length === 0 ? (
+              <tr>
+                <td colSpan={10} className="py-4 px-6 text-center font-normal text-xl bg-gray-100 text-gray-600">
+                  Nenhum bolo cadastrado
+                </td>
+              </tr>
+            ) : (
+            currentElements.map((cake, index) => {
               const currentIndex = firstIndex + index + 1;
               return (
-                <tr
-                  key={cake.id}
-                  className="bg-white border-b"
-                >
+                <tr key={cake.id} className="bg-white border-b">
                   <td className="py-4 px-6">{currentIndex}</td>
                   <td className="py-4 px-6">{cake.dough}</td>
                   <td className="py-4 px-6">{cake.filling}</td>
@@ -164,11 +169,12 @@ export function Cakes() {
                     <UpdateCake id={cake.id} />
                   </td>
                   <td className="py-4 px-1">
-                    <DeleteButton onClick={() => deleteCake(cake.id)}/>
+                    <DeleteButton onClick={() => deleteCake(cake.id)} />
                   </td>
                 </tr>
               );
-            })}
+            })
+          )}
           </tbody>
         </table>
       </div>
@@ -179,7 +185,7 @@ export function Cakes() {
         isNextDisabled={isNextDisabled}
         elementsPerPage={elementsPerPage}
         onElementsPerPageChange={setElementsPerPage}
-       />
+      />
     </>
   );
 }

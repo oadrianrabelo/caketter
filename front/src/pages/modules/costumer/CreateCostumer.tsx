@@ -60,7 +60,7 @@ export function CreateCostumer() {
         Notification.fire({
           icon: "error",
           title: `Erro ao cadastrar cliente`,
-          text: err,
+          text: err.response.data.message,
         });
       });
   };
