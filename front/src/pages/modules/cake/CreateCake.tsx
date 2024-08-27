@@ -4,6 +4,7 @@ import { api } from "../../../services/API";
 import { Notification } from "../../../utils/Notification";
 import { ConfirmButton } from "../../../components/ConfirmButton";
 import { useAuth } from "../../../context/AuthContext";
+import CaketterLogo from "../../../assets/1x/SVG/logo-without-text.svg";
 
 interface Cake {
   dough: string;
@@ -62,10 +63,10 @@ export function CreateCake() {
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
         <div>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Tux_Paint_birthday_cake.svg/2048px-Tux_Paint_birthday_cake.svg.png"
+        <img
+            src={CaketterLogo}
             alt="Caketter"
-            className="mx-auto h-12 w-auto"
+            className="mx-auto w-24"
           />
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             Cadastre um bolo
